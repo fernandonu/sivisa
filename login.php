@@ -100,7 +100,7 @@ if (ereg("/login.php",$_SERVER["SCRIPT_NAME"])) {
   		<td width="785" bgcolor="#006A9E">
   		<div > 
 			<p align="center">
-				<b><font color="#FFFFFF" face="Tahoma" size="2">2013 © Copyright</font></b>
+				<b><font color="#FFFFFF" face="Tahoma" size="2">2014 © Copyright</font></b>
 			</p>
 		</div>
 		</td>
