@@ -9,7 +9,7 @@ if (ereg("/login.php",$_SERVER["SCRIPT_NAME"])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Sistema de Gestión Personal</title>
+<title>Sistema de Vigilancia Sanitario</title>
 <head>
 <link rel="icon" href="<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico">
 <link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico'>
@@ -100,7 +100,7 @@ if (ereg("/login.php",$_SERVER["SCRIPT_NAME"])) {
   		<td width="785" bgcolor="#006A9E">
   		<div > 
 			<p align="center">
-				<b><font color="#FFFFFF" face="Tahoma" size="2">2012 © Copyright</font></b>
+				<b><font color="#FFFFFF" face="Tahoma" size="2">2013 © Copyright</font></b>
 			</p>
 		</div>
 		</td>
