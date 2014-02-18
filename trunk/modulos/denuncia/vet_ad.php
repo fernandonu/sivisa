@@ -66,6 +66,8 @@ if ($id_veterinaria) {
 		$numero=$res_persona->fields['numero'];
 		$tel=$res_persona->fields['tel'];
 		$email=$res_persona->fields['email'];
+		$id_veterinaria=$res_persona->fields['id_veterinaria'];
+		
 		
 }
 }
@@ -162,11 +164,11 @@ function buscar_combo(obj)
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="85%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
  <tr id="mo">
-    <td>
+   <td>
     	<?
     	if (!$id_veterinaria) {
     	?>  
-    	<font size=+1><b>Nuevo Dato</b></font>   
+    	<font size=+1><b>Nueva Veterinaria</b></font>   
     	<? }
         else {
         ?>
@@ -190,7 +192,7 @@ function buscar_combo(obj)
 	         </tr>
     	</table></td></tr>	     
    
-   <tr><td colspan=9><div id=<?=$id_tabla?> style='display:none'><table width=100% align="center" >
+   <tr><td colspan=9><div ><table width=100% align="center" >
           <tr>
          	<td align="right">
          	  <b>Razon Social:</b>
@@ -200,7 +202,7 @@ function buscar_combo(obj)
             </td>
           </tr>  
 	</table></div></td></tr> 
-    <tr><td colspan=9><div id=<?=$id_tabla?> style='display:none'><table width=75% align="center" >     
+    <tr><td colspan=9><div ><table width=75% align="center" >     
         <tr>
          	<td align="right">
          	  <b>Domicilio/Calle:</b>
@@ -216,7 +218,7 @@ function buscar_combo(obj)
             </td>
 		 </tr>
 	</table></div></td></tr>
-	<tr><td colspan=9><div id=<?=$id_tabla?> style='display:none'><table width=100% align="center" >     
+	<tr><td colspan=9><div ><table width=100% align="center" >     
 		<tr>
           <td align="right">
 				<b>Localidad:</b>
