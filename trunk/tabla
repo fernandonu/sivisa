@@ -1,52 +1,16 @@
-CREATE SCHEMA epi
-  AUTHORIZATION postgres;
- 
- CREATE TABLE epi.veterinarias
-(
-  id_veterinaria serial NOT NULL,
-  nom_veterinaria character varying(250) NOT NULL DEFAULT 250,
-  domicilio character varying(250),
-  numero integer,
-  localidad character varying(250),
-  departamento character varying(200),
-  CONSTRAINT veterinarias_pkey PRIMARY KEY (id_veterinaria)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE epi.veterinarias OWNER TO postgres;
-
-
-CREATE TABLE epi.denuncia
-(
-  id_denuncia serial NOT NULL,
-  n_prof character varying(200) NOT NULL,
-  a_prof character varying(200) NOT NULL,
-  matricula character varying(8),
-  dni_prof integer NOT NULL,
-  tabla character varying(150) NOT NULL,
-  fecha_notif date NOT NULL,
-  CONSTRAINT denuncia_pkey PRIMARY KEY (id_denuncia)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE epi.denuncia OWNER TO postgres;
-
- 
-  CREATE TABLE epi.brucel_can
+CREATE TABLE epi.brucel_can
 (
   id_bruc_can integer NOT NULL DEFAULT nextval('epi.lvcan_id_lvc_seq'::regclass),
   id_denuncia integer NOT NULL,
-  usuario character varying(50),
-  fecha_carga timestamp(6) without time zone,
-  raza character varying(200),
-  sexo character varying(10),
-  color_m character varying(100),
-  edad integer,
-  nombre character varying(200),
-  dato_epidem text,
+  usuario character varying(100),
+  f_carga timestamp(6) without time zone,
+  n_prop character varying(200),
+  d_epidemio text,
   laboratorios text,
+  d_animal text,
+  a_prop character varying(200),
+  telef character varying(100),
+  dom_prop character varying(300),
   CONSTRAINT brucel_can_pkey PRIMARY KEY (id_bruc_can)
 )
 WITH (
@@ -111,6 +75,38 @@ WITH (
 );
 ALTER TABLE epi.brucellosis OWNER TO postgres;
 
+CREATE TABLE epi.denuncia
+(
+  id_denuncia serial NOT NULL,
+  n_prof character varying(200) NOT NULL,
+  a_prof character varying(200) NOT NULL,
+  matricula character varying(50),
+  dni_prof integer NOT NULL,
+  fecha_notif date NOT NULL,
+  id_veterinaria integer,
+  f_carga date,
+  usuario character varying(50),
+  id_tabla integer,
+  CONSTRAINT denuncia_pkey PRIMARY KEY (id_denuncia)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE epi.denuncia OWNER TO postgres;
+
+
+CREATE TABLE epi.ficha_epi
+(
+  id_tabla serial NOT NULL,
+  descripcion character varying(200) NOT NULL,
+  n_t character varying(50),
+  CONSTRAINT ficha_epi_pkey PRIMARY KEY (id_tabla)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE epi.ficha_epi OWNER TO postgres;
+
 CREATE TABLE epi.hidatidosis
 (
   id_hidat serial NOT NULL,
@@ -155,6 +151,8 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE epi.hidatidosis OWNER TO postgres;
+
+
 
 CREATE TABLE epi.leptospirosis
 (
@@ -208,7 +206,6 @@ WITH (
 );
 ALTER TABLE epi.leptospirosis OWNER TO postgres;
 
-
 CREATE TABLE epi.lvcan
 (
   id_lvc serial NOT NULL,
@@ -259,3 +256,19 @@ WITH (
 );
 ALTER TABLE epi.lvcan OWNER TO postgres;
 
+CREATE TABLE epi.veterinarias
+(
+  id_veterinaria serial NOT NULL,
+  nom_veterinaria character varying(250) NOT NULL DEFAULT 250,
+  domicilio character varying(250),
+  numero character varying(50),
+  localidad character varying(250),
+  departamento character varying(200),
+  tel character varying(200),
+  email character varying(300),
+  CONSTRAINT veterinarias_pkey PRIMARY KEY (id_veterinaria)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE epi.veterinarias OWNER TO postgres;
