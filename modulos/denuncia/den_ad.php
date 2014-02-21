@@ -95,9 +95,9 @@ if ($_POST['guardart5']=='Guardar'){
   	$usuario=$_ses_user['name'];
 	    
 		$query="insert into epi.brucel_can
-			   	(id_bruc_can, n_prop, a_prop, dom_prop, telef, d_animal, d_epidemio,f_carga, usuario)
+			   	(id_bruc_can, id_denuncia, n_prop, a_prop, dom_prop, telef, d_animal, d_epidemio,laboratorios, f_carga, usuario)
 			   	values
-			    (nextval('epi.brucel_can_id_bruc_can_seq'), '$n_prop', '$a_prop', '$dom_prop', '$telef', '$d_animal', '$d_epidemio', '$laboratorios', now(), '$usuario')";
+			    (nextval('epi.brucel_can_id_bruc_can_seq'), '$id_denuncia','$n_prop', '$a_prop', '$dom_prop', '$telef', '$d_animal', '$d_epidemio', '$laboratorios', now(), '$usuario')";
 				
 			   sql($query, "Error al insertar") or fin_pagina();
 			 	 
@@ -128,6 +128,117 @@ if ($id_denuncia) {
 		$id_tabla=$res_persona->fields['id_tabla'];		
 		$id_denuncia=$res_persona->fields['id_denuncia'];	
 		$detalle=$res_persona->fields['descripcion'];	
+		
+		if($id_tabla==5){ // brucelosis canina
+	
+		$q_12="SELECT * FROM epi.denuncia
+				INNER JOIN epi.brucel_can ON epi.denuncia.id_denuncia = epi.brucel_can.id_denuncia
+			";
+		$res_q12 =sql($q_12, "Error consulta 02") or fin_pagina();
+		if($res_q12->RecordCount()!=0){
+			$id_bruc_can==$res_q12->fields['id_bruc_can']; 
+			$n_prop=$res_q12->fields['n_prop'];
+			$a_prop=$res_q12->fields['a_prop'];
+			$dom_prop=$res_q12->fields['dom_prop'];
+			$telef=$res_q12->fields['telef'];
+			$d_animal=$res_q12->fields['d_animal'];
+			$d_epidemio=$res_q12->fields['d_epidemio'];
+			$laboratorios=$res_q12->fields['laboratorios'];
+		}
+	}else {	//LEPTOSPIROSIS
+		$q_lep="SELECT DISTINCT
+				epi.leptospirosis.id_leptosp,
+				epi.leptospirosis.ape_pac,
+				epi.leptospirosis.nom_pac,
+				epi.leptospirosis.f_nacimiento,
+				epi.leptospirosis.sexo,
+				epi.leptospirosis.domicilio,
+				epi.leptospirosis.localidad,
+				epi.leptospirosis.departamento,
+				epi.leptospirosis.trurales,
+				epi.leptospirosis.e_frogorifico,
+				epi.leptospirosis.obrero,
+				epi.leptospirosis.otro,
+				epi.leptospirosis.f_psintoma,
+				epi.leptospirosis.f_internacion,
+				epi.leptospirosis.f_muestra,
+				epi.leptospirosis.ictericia,
+				epi.leptospirosis.cefalea,
+				epi.leptospirosis.s_mengeo,
+				epi.leptospirosis.iconjuntivalbilat,
+				epi.leptospirosis.fiebre,
+				epi.leptospirosis.mialgias,
+				epi.leptospirosis.ers1hs,
+				epi.leptospirosis.leucositosis,
+				epi.leptospirosis.eutrofilia,
+				epi.leptospirosis.uremia,
+				epi.leptospirosis.bili_direc,
+				epi.leptospirosis.tgp,
+				epi.leptospirosis.cpk,
+				epi.leptospirosis.a_domestico,
+				epi.leptospirosis.roedores,
+				epi.leptospirosis.rio_arroyo,
+				epi.leptospirosis.laguna,
+				epi.leptospirosis.alcantarilla,
+				epi.leptospirosis.inundacion,
+				epi.leptospirosis.f_notificacion,
+				epi.leptospirosis.semana_epi,
+				epi.leptospirosis.esablecimiento,
+				epi.leptospirosis.serologia,
+				epi.leptospirosis.positividad,
+				epi.leptospirosis.titulo,
+				epi.leptospirosis.aislamiento,
+				epi.leptospirosis.obs 
+				INNER JOIN epi.leptospirosis ON epi.leptospirosis.id_denuncia = epi.denuncia.id_denuncia
+				ORDER BY
+				epi.leptospirosis.id_leptosp ASC";
+		$res_lep=sql($q_lep, "Error consulta 03") or fin_pagina();
+		if($res_lep->RecordCount()!=0){
+			$id_leptosp=$res_lep->fields['id_leptosp'];
+			$ape_pac=$res_lep->fields['ape_pac'];
+			$nom_pac=$res_lep->fields['nom_pac'];
+			$f_nacimiento=$res_lep->fields['f_nacimiento'];
+			$sexo=$res_lep->fields['sexo'];
+			$domicilio=$res_lep->fields['domicilio'];
+			$localidad=$res_lep->fields['localidad'];
+			$departamento=$res_lep->fields['departamento'];
+			$trurales=$res_lep->fields['trurales'];
+			$e_frogorifico=$res_lep->fields['e_frogorifico'];
+			$obrero=$res_lep->fields['obrero'];
+			$otro=$res_lep->fields['otro'];
+			$f_psintoma=$res_lep->fields['f_psintoma'];
+			$f_internacion=$res_lep->fields['f_internacion'];
+			$f_muestra=$res_lep->fields['f_muestra'];
+			$ictericia=$res_lep->fields['ictericia'];
+			$cefalea=$res_lep->fields['cefalea'];
+			$s_mengeo=$res_lep->fields['s_mengeo'];
+			$iconjuntivalbilat=$res_lep->fields['iconjuntivalbilat'];
+			$fiebre=$res_lep->fields['fiebre'];
+			$mialgias=$res_lep->fields['mialgias'];
+			$ers1hs=$res_lep->fields['ers1hs'];
+			$leucositosis=$res_lep->fields['leucositosis'];
+			$eutrofilia=$res_lep->fields['eutrofilia'];
+			$uremia=$res_lep->fields['uremia'];
+			$bili_direc=$res_lep->fields['bili_direc'];
+			$tgp=$res_lep->fields['tgp'];
+			$cpk=$res_lep->fields['cpk'];
+			$a_domestico=$res_lep->fields['a_domestico'];
+			$roedores=$res_lep->fields['roedores'];
+			$rio_arroyo=$res_lep->fields['rio_arroyo'];
+			$laguna=$res_lep->fields['laguna'];
+			$alcantarilla=$res_lep->fields['alcantarilla'];
+			$inundacion=$res_lep->fields['inundacion'];
+			$f_notificacion=$res_lep->fields['f_notificacion'];
+			$semana_epi=$res_lep->fields['semana_epi'];
+			$esablecimiento=$res_lep->fields['esablecimiento'];
+			$serologia=$res_lep->fields['d_epidemio'];
+			$positividad=$res_lep->fields['d_epidemio'];
+			$titulo=$res_lep->fields['d_epidemio'];
+			$aislamiento=$res_lep->fields['d_epidemio'];
+			$obs=$res_lep->fields['d_epidemio'];
+			
+		}
+		
 	}
 }
 
@@ -244,7 +355,7 @@ function control_nuevost5(){
 		return false;
 		}
 
- if (confirm('Conforma agregar datos de la denuncia?'))return true;
+ if (confirm('Confirma agregar datos de la denuncia?'))return true;
 	 else return false;	
 }//de function control_nuevos()
 
@@ -439,18 +550,129 @@ function buscar_combo(obj)
 
 <? if($id_tabla==5){
 	
-	$q_1="SELECT * FROM epi.denuncia
-			INNER JOIN epi.brucel_can ON epi.denuncia.id_denuncia = epi.brucel_can.id_denuncia";
-	$res_q1 =sql($q_1, "Error consulta 02") or fin_pagina();
-	if($res_q1->RecordCount()!=0){
-		$id_bruc_can==$res_q1->fields['id_bruc_can']; 
-		$n_prop=$res_q1->fields['n_prop'];
-		$a_prop=$res_q1->fields['a_prop'];
-		$dom_prop=$res_q1->fields['dom_prop'];
-		$telef=$res_q1->fields['telef'];
-		$d_animal=$res_q1->fields['d_animal'];
-		$d_epidemio=$res_q1->fields['d_epidemio'];
-		$laboratorios=$res_q1->fields['laboratorios'];
+	
+	?>
+<tr><td><table width=90% align="center" class="bordes">
+     <tr>
+      <td id=mo colspan="2">
+       <b> FICHA DE <?=$detalle; ?> </b>
+      </td>
+     </tr>
+     <tr><td><table>
+	         <tr>	           
+	           <td align="right" colspan="2">
+	            <b> DATOS DEL PROPIETARIO </b>
+	           </td>
+	         </tr>
+    	</table></td></tr>	 
+   <tr><td colspan=9><div ><table width=55% align="left" >
+          <tr>
+         	<td align="left">
+         	  <b>Nombre:</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="50" value="<?=$n_prop;?>" name="n_prop" <? if ($id_bruc_can) echo "disabled"?>>
+            </td>
+            <td align="left">
+         	  <b>Apellido:</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="50" value="<?=$a_prop;?>" name="a_prop" <? if ($id_bruc_can) echo "disabled"?>>
+            </td>
+          </tr>  
+	   </table></div></td></tr>
+	  <tr><td colspan=9><div ><table width=75% align="left" >     
+        <tr>
+         	<td align="left">
+         	  <b>Domicilio:</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="75" value="<?=$dom_prop;?>" name="dom_prop" <? if ($id_bruc_can) echo "disabled"?>>
+            </td>
+            <td align="left">
+         	  <b>Telefono:</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="20" value="<?=$telef;?>" name="telef" <? if ($id_bruc_can) echo "disabled"?>>
+            </td>
+		 </tr>
+	</table></div></td></tr>	    
+   
+	<tr><td colspan=9><div ><table width=65% align="left" >     
+        <tr>
+         	<td align="left">
+				<b>Datos del Animal:</b>
+			</td>         	
+			<td align='left'>
+			      <textarea cols='100' rows='4' name='d_animal'  <? if($id_bruc_can) echo "disabled"?>><?=$d_animal;?></textarea>
+			</td>
+		</tr>
+		</table></div></td></tr>	    
+   
+	<tr><td colspan=9><div ><table width=65% align="left" >   
+		<tr>
+            <td align="left">
+         	  <b>Detalle Epidemiologico:</b>
+         	</td>         	
+            <td align='left'>
+			      <textarea cols='100' rows='4' name='d_epidemio'  <? if($id_bruc_can) echo "disabled"?>><?=$d_epidemio;?></textarea>
+            </td>
+		 </tr>
+		 </table></div></td></tr>	    
+   
+	<tr><td colspan=9><div ><table width=65% align="left" >   
+		 <tr>
+            <td align="left">
+         	  <b>Examenes de laboratorio:</b>
+         	</td>         	
+            <td align='left'>
+			      <textarea cols='100' rows='4' name='laboratorios'  <? if($id_bruc_can) echo "disabled"?>><?=$laboratorios;?></textarea>
+            </td>
+		 </tr>
+	</table></div></td></tr>	
+
+<table border="1" align="center" width="100%">
+	<tr>
+	   <td align="center">
+	   
+   		<? 
+   		 if($id_bruc_can){ ?>
+			      <input type=button name="editar" value="Editar" onclick="editar_campost5()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
+			      <input type="submit" name="guardar_editart5" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevost5()">&nbsp;&nbsp;
+			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
+		   <?}else {?>
+			      <input type="submit" name="guardart5" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevost5()">&nbsp;&nbsp;
+		 <? } ?>
+	    </td>
+	</tr> 
+</table>	
+<table width=100% align="center" class="bordes">
+ <? }//fin if $idtabla ?>  
+
+ 
+<? if($id_tabla==1){
+	
+	$q_12="SELECT epi.brucel_can.n_prop,
+			epi.brucel_can.d_epidemio,
+			epi.brucel_can.laboratorios,
+			epi.brucel_can.d_animal,
+			epi.brucel_can.a_prop,
+			epi.brucel_can.telef,
+			epi.brucel_can.dom_prop,
+			epi.brucel_can.id_bruc_can
+			FROM epi.denuncia
+			INNER JOIN epi.brucel_can ON epi.denuncia.id_denuncia = epi.brucel_can.id_denuncia
+			";
+	$res_q12 =sql($q_12, "Error consulta 02") or fin_pagina();
+	if($res_q12->RecordCount()!=0){
+	   $id_bruc_can==$res_q12->fields['id_bruc_can']; 
+		$n_prop=$res_q12->fields['n_prop'];
+		$a_prop=$res_q12->fields['a_prop'];
+		$dom_prop=$res_q12->fields['dom_prop'];
+		$telef=$res_q12->fields['telef'];
+		$d_animal=$res_q12->fields['d_animal'];
+		$d_epidemio=$res_q12->fields['d_epidemio'];
+		$laboratorios=$res_q12->fields['laboratorios'];
 	}	
 	?>
 <tr><td><table width=90% align="center" class="bordes">
@@ -535,7 +757,9 @@ function buscar_combo(obj)
 <table border="1" align="center" width="100%">
 	<tr>
 	   <td align="center">
-   		<? if($id_bruc_can){ ?>
+	   
+   		<? 
+   		 if($id_bruc_can){ ?>
 			      <input type=button name="editar" value="Editar" onclick="editar_campost5()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
 			      <input type="submit" name="guardar_editart5" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevost5()">&nbsp;&nbsp;
 			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
@@ -546,7 +770,14 @@ function buscar_combo(obj)
 	</tr> 
 </table>	
 <table width=100% align="center" class="bordes">
- <? }//fin if $idtabla ?>    	
+ <? }//fin if $idtabla ?>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 		  <tr align="center">
 		   <td>
