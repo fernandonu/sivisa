@@ -62,7 +62,7 @@ $result = sql($sql,"No se ejecuto en la consulta principal") or die;?>
 	  </tr>
   <?
    while (!$result->EOF) {
-   		$ref = encode_link("den_ad.php",array("id_denuncia"=>$result->fields['id_denuncia'],"pagina"=>"den_lis"));		   		
+   		$ref = encode_link("den_ad.php",array("id_denuncia"=>$result->fields['id_denuncia'],"id_tabla"=>$result->fields['id_tabla'],"pagina"=>"den_lis"));		   		
     	$onclick_elegir="location.href='$ref'";
     	$id_veterinaria=$result->fields['id_veterinaria'];
    	?>

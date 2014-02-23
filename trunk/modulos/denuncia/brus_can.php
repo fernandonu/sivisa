@@ -115,23 +115,6 @@ function control_nuevos(){
 	 else return false;	
 }//de function control_nuevos()
 
-function editar_campos(){
-	document.all.n_prop.disabled=false;
-	document.all.a_prop.disabled=false;	
-	document.all.dom_prop.disabled=false;
-	document.all.telef.disabled=false;
-	document.all.d_animal.disabled=false;
-	document.all.d_epidemio.disabled=false;
-	document.all.laboratorios.disabled=false;
-
-	document.all.guardar_editar.disabled=false;
-	document.all.cancelar_editar.disabled=false;
-	document.all.borrar.disabled=false;
-	return true;
-}
-//de function control_nuevos()
-
-
 </script>
 
 <form name='form1' action='brus_can.php' method='POST'>
@@ -246,9 +229,7 @@ function editar_campos(){
 <table class="bordes" align="center" width="100%">
 		 <tr>
 		    <td align="center">
-		      <input type=button name="editar" value="Editar" onclick="editar_campos()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
 		      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-		      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
 		      <input type="submit" name="borrar" value="Borrar" style="width=130px" onclick="return confirm('Esta seguro que desea eliminar')" >
 		    </td>
 		 </tr> 
