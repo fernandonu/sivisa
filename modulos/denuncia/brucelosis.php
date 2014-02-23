@@ -160,7 +160,7 @@ if ($_POST['guardar']=='Guardar'){
 				    $leche=$res_bruc->fields['leche'];
 				    $leche_cruda=$res_bruc->fields['leche_cruda'];	
 					$obs=$res_bruc->fields['obs'];
-	
+			}	
 }//fin $id_bucelosis
 
 echo $html_header;
@@ -208,23 +208,6 @@ function control_nuevos(){
  if (confirm('Esta Seguro que Desea Agregar Registro?'))return true;
 	 else return false;	
 }//de function control_nuevos()
-
-
-function editar_campos(){	
-	document.all.n_prof.disabled=false;
-	document.all.a_prof.disabled=false;	
-	document.all.matricula.disabled=false;
-	document.all.dni_prof.disabled=false;
-	document.all.id_veterinaria.disabled=false;
-	document.all.id_tabla.disabled=false;
-
-	document.all.guardar_editar.disabled=false;
-	document.all.cancelar_editar.disabled=false;
-	document.all.borrar.disabled=false;
-	return true;
-}
-//de function control_nuevos()
-//controlan que ingresen todos los datos necesarios par el muleto
 
 
 /**********************************************************/
@@ -283,20 +266,27 @@ function buscar_combo(obj)
        
     </td>
  </tr>
-
- <tr><td><table width=90% align="center" class="bordes">
+<tr><td><table width=90% align="center" class="bordes">
      <tr>
       <td id=mo colspan="2">
-       <b> Datos del Profesional Denunciante </b>
+       <b> BRUCELOSIS </b>
       </td>
      </tr>
-     	<tr><td><table>
+     <tr><td><table>
 	         <tr>	           
 	           <td align="right" colspan="2">
-	            <b> Número del Dato: <font size="+1" color="Red"><?=($id_bucelosis)? $id_bucelosis: "Nuevo Dato";?></font> </b>
+	            <b> Número del Dato: <font size="+1" color="Red"><?=($id_denuncia)? $id_denuncia: "Nuevo Dato";?></font> </b>
 	           </td>
 	         </tr>
-    	</table></td></tr>	     
+    </table></td></tr>	     
+      <tr><td colspan=9><div ><table width=55% align="left" >
+          <tr>         
+	           <td align="right" colspan="2">
+	            <b> DATOS DEL PROPIETARIO </b>
+	           </td>
+	         </tr>
+    	</table></td></tr>	 
+   <tr><td colspan=9><div ><table width=55% align="left" >     
    
    <tr><td colspan=9><div ><table width=100% align="center" >
           <tr>

@@ -266,8 +266,8 @@ function editar_campos(){
          	  <b>Sexo:</b>
       					<input type="radio" name="sexo" value="F" checked>Femenino
 						<input type="radio" name="sexo" value="M">Masculino
-					</td>
-            </td>
+			</td>
+           
 		 </tr>
 	</table></div></td></tr>	    
 	  <tr><td colspan=9><div ><table width=95% align="left" >     
@@ -597,9 +597,7 @@ function editar_campos(){
 <table class="bordes" align="center" width="100%">
 		 <tr>
 		    <td align="center">
-		      <input type=button name="editar" value="Editar" onclick="editar_campos()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
 		      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-		      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
 		      <input type="submit" name="borrar" value="Borrar" style="width=130px" onclick="return confirm('Esta seguro que desea eliminar')" >
 		    </td>
 		 </tr> 
