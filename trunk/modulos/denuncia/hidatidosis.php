@@ -126,67 +126,7 @@ echo $html_header;
 ?>
 <script>
 
-//controlan que ingresen todos los datos necesarios par el muleto
-function control_nuevos(){ 
-	 if(document.all.n_prof.value==""){
-	  	alert('Debe ingresar el Nombre del Profesional');
-	  	document.all.n_prof.focus();
-	  	return false;
-	 } 
-	 if(document.all.a_prof.value==""){
-	  	alert('Debe ingresar Apellido');
-	 	document.all.a_prof.focus();
-		return false;
-	 } 
-	 if(document.all.matricula.value==""){
-	  alert('Debe ingresar Matricula');
-	  document.all.matricula.focus();
-	  return false;
-	 	} 
-	 if(document.all.dni_prof.value==""){
-	  alert('Debe ingresar Numero de documento');
-	  document.all.dni_prof.focus();
-	  return false; 
-	 } 
-	 if(document.all.fecha_notif.value==""){
-	  alert('Debe ingresar Fecha');
-	  document.all.fecha_notif.focus();
-	  return false;
-	 	} 
-	 
-	 if(document.all.id_veterinaria.value==-1 ){
-		alert('Debe ingresar Veterinaria');
-		document.all.id_veterinaria.focus();
-		return false;
-		}
-	if(document.all.id_tabla.value==-1 ){
-		alert('Debe ingresar Tipo de Ficha');
-		document.all.id_tabla.focus();
-		return false;
-		}
- if (confirm('Esta Seguro que Desea Agregar Registro?'))return true;
-	 else return false;	
-}//de function control_nuevos()
 
-
-function editar_campos(){	
-	document.all.n_prof.disabled=false;
-	document.all.a_prof.disabled=false;	
-	document.all.matricula.disabled=false;
-	document.all.dni_prof.disabled=false;
-	document.all.id_veterinaria.disabled=false;
-	document.all.id_tabla.disabled=false;
-
-	document.all.guardar_editar.disabled=false;
-	document.all.cancelar_editar.disabled=false;
-	document.all.borrar.disabled=false;
-	return true;
-}
-//de function control_nuevos()
-//controlan que ingresen todos los datos necesarios par el muleto
-
-
-/**********************************************************/
 //funciones para busqueda abreviada utilizando teclas en la lista que muestra los clientes.
 var digitos=10; //cantidad de digitos buscados
 var puntero=0;
@@ -294,63 +234,14 @@ function buscar_combo(obj)
 			</td>
 		 </tr>
 	</table></div></td></tr>
-	<tr><td colspan=9><div ><table width=100% align="center" >     
-		<tr>
-	          	<td align="right">
-					<b>Veterinaria:</b>
-				</td>
-				<td align='left'>
-            		<select name=id_veterinaria Style="width=757px" <?if ($id_denuncia) echo 'disabled'?>>
-							<option value=-1>Seleccione</option>
-							<?$query10="SELECT DISTINCT *
-										FROM epi.veterinarias
-										ORDER BY
-										epi.veterinarias.localidad ASC,
-										epi.veterinarias.nom_veterinaria ASC";
-								$res_10=sql($query10,"Error en consulta Nº 2");?>	
-							 <? while (!$res_10->EOF){
-									$id_veterinaria_temp=$res_10->fields['id_veterinaria'];
-									$nom_veterinaria=$res_10->fields['localidad']." - ".$res_10->fields['nom_veterinaria'] ;?>
-									<option value='<?=$id_veterinaria_temp?>' <? if(trim($id_veterinaria_temp)==trim($id_veterinaria))echo "selected"?>><?=$nom_veterinaria?></option>
-									<?$res_10->movenext();
-								}?>
-					</select>
-            	</td>
-		 </tr>
-		 <tr>
-          <td align="right">
-				<b>Tipo de Ficha:</b>
-			</td>
-			<td align='left'>
-             <select name=id_tabla Style="width=757px" <?if ($id_denuncia) echo 'disabled'?>>
-							<option value=-1>Seleccione</option>
-							<?$query10="SELECT DISTINCT *
-										FROM
-										epi.ficha_epi
-										ORDER BY
-										epi.ficha_epi.descripcion ASC";
-								$res_10=sql($query10,"Error en consulta Nº 2");?>	
-							 <? while (!$res_10->EOF){
-									$id_tabla_temp=$res_10->fields['id_tabla'];
-									$descripcion=$res_10->fields['descripcion'];?>
-									<option value='<?=$id_tabla_temp?>' <? if(trim($id_tabla_temp)==trim($id_tabla))echo "selected"?>><?=$descripcion?></option>
-									<?$res_10->movenext();
-								}?>
-					</select>
-            </td>
-		 </tr>
-	  <tr>
-         
-	</table></div></td></tr> 
+	
 
        
 <table border="1" align="center" width="100%">
 	<tr>
 	   <td align="center">
    		<? if($id_denuncia){ ?>
-			      <input type=button name="editar" value="Editar" onclick="editar_campos()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
 			      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
 		   <?}else {?>
 			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		 <? } ?>
