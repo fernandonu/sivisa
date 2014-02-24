@@ -320,14 +320,14 @@ function buscar_combo(obj)
 	<tr>
 	   <td align="center">
    		<? if($id_tabla==5){ 
-				$ref = encode_link("brus_can.php",array("id_denuncia"=>$id_denuncia,"pagina"=>"den_ad"));		   		
+				$ref = encode_link("brus_can.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla, "pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
  				<input type=button name="Bruc_can" value="Brucelosis Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Brucelosis Canina" style="width=150px"> 
 		 
 		 <? }elseif ($id_tabla==1){ 
-				$ref = encode_link("leptos.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
+				$ref = encode_link("leptos.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla, "pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=submit name="leptospirosis" value="Leptospirosis" onclick="<?=$onclick_ir;?>" title="Ficha de Leptospirosis" style="width=150px">
+ 				<input type=button name="leptospirosis" value="Leptospirosis" onclick="<?=$onclick_ir;?>" title="Ficha de Leptospirosis" style="width=150px">
 		
 		<? }elseif ($id_tabla==2){ 
 				$ref = encode_link("brucelosis.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
@@ -342,7 +342,7 @@ function buscar_combo(obj)
 		<? }elseif ($id_tabla==4){ 
 				$ref = encode_link("leish_can.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="leish_can" value="Leishmaniasis Visceral Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Leishmaniasis Visceral Canina" style="width=150px">
+ 				<input type=button name="leish_can" value="Leishmaniasis Visceral Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Leishmaniasis Visceral Canina" style="width=350px">
 		<?}?>
 	    </td>
 	</tr> 

@@ -39,10 +39,8 @@ $res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
 if ($res_den->recordcount()>0) $id_bruc_can=$res_den->fields['id_bruc_can'];
 
 if ($id_bruc_can){
-			$query="SELECT * FROM epi.brucel_can where id_denuncia=$id_denuncia";
-			
+			$query="SELECT * FROM epi.brucel_can where id_denuncia=$id_denuncia";			
 			$res_q12 =sql($query, "Error consulta t5") or fin_pagina();
-			if($res_q12->RecordCount()!=0){
 				$id_bruc_can==$res_q12->fields['id_bruc_can']; 
 				$n_prop=$res_q12->fields['n_prop'];
 				$a_prop=$res_q12->fields['a_prop'];
@@ -52,7 +50,7 @@ if ($id_bruc_can){
 				$d_epidemio=$res_q12->fields['d_epidemio'];
 				$laboratorios=$res_q12->fields['laboratorios'];
 }
-}
+
 echo $html_header;
 ?>
 <script>
@@ -67,30 +65,9 @@ function control_nuevos(){
 		  	alert('Debe ingresar Apellido');
 		 	document.all.a_prop.focus();
 			return false;
-		 } 
-		 if(document.all.dom_prop.value==""){
-		  alert('Debe ingresar Matricula');
-		  document.all.dom_prop.focus();
-		  return false;
-		 	} 
-		 if(document.all.d_animal.value==""){
-		  alert('Debe ingresar Numero de documento');
-		  document.all.d_animal.focus();
-		  return false; 
-		 } 
-		 if(document.all.d_epidemio.value==""){
-		  alert('Debe ingresar Fecha');
-		  document.all.d_epidemio.focus();
-		  return false;
-		 	} 
-		 
-		 if(document.all.laboratorios.value==-1 ){
-			alert('Debe ingresar Veterinaria');
-			document.all.laboratorios.focus();
-			return false;
-			}
+		 } 		 
 	
- if (confirm('Confirma agregar datos de la denuncia?'))return true;
+ if (confirm('Confirma agregar datos?'))return true;
 	 else return false;	
 }//de function control_nuevos()
 
