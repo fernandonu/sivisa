@@ -20,8 +20,8 @@ $filtro = array(
 $sql_tmp="SELECT *
 			FROM
 			epi.denuncia
-			INNER JOIN epi.veterinarias ON epi.denuncia.id_veterinaria = epi.veterinarias.id_veterinaria
-			INNER JOIN epi.ficha_epi ON epi.denuncia.id_tabla = epi.ficha_epi.id_tabla";
+			left JOIN epi.veterinarias ON epi.denuncia.id_veterinaria = epi.veterinarias.id_veterinaria
+			left JOIN epi.ficha_epi ON epi.denuncia.id_tabla = epi.ficha_epi.id_tabla";
 
 echo $html_header;
 
