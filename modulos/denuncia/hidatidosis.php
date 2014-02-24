@@ -12,12 +12,12 @@ if ($_POST['guardar']=='Guardar'){
 		$query="insert into epi.hidatidosis
 					(id_hidat,id_denuncia,ape_pac,nom_pac,f_nacimiento,sexo,domicilio,localidad,departamento,rural,domestica,profesional,otros,mn_unoh,mn_unom,
 					mna_qh,mna_qm,my_qh,my_qm,cant_perros,p_comen,ovino,bovino,pocino,equino,f_sintoma,descrip,tmedico,tquirurgico,
-					dd5,contraief,inmunoef,ecografia,tac,f_notificacion,medidas,obs)
+					dd5,contraief,inmunoef,ecografia,tac,f_notificacion,medidas,obs,dni_prof,edad)
 					Values
 					(nextval('epi.hidatidosis_id_hidat_seq'),'$id_denuncia',
 					'$ape_pac','$nom_pac','$f_nacimiento','$sexo','$domicilio','$localidad','$departamento','$rural','$domestica','$profesional','$otros','$mn_unoh','$mn_unom',
-					'$$mna_qh','$mna_qm','$my_qh','$my_qm','$cant_perros','$p_comen','$ovino','$bovino','$pocino','$equino','$f_sintoma','$descrip','$tmedico','$tquirurgico',
-					'$$dd5','$contraief','$inmunoef','$ecografia','$tac','$f_notificacion','$medidas','$obs')";
+					'$mna_qh','$mna_qm','$my_qh','$my_qm','$cant_perros','$p_comen','$ovino','$bovino','$pocino','$equino','$f_sintoma','$descrip','$tmedico','$tquirurgico',
+					'$dd5','$contraief','$inmunoef','$ecografia','$tac','$f_notificacion','$medidas','$obs','$dni_prof','$edad')";
 		 sql($query, "Error al insertar t3") or fin_pagina();
 		 $accion="Los datos se han guardado correctamente"; 
 	
@@ -46,10 +46,11 @@ if ($id_hidat) {
 					$nom_pac=$res_hid->fields['nom_pac'];
 					$f_nacimiento=$res_hid->fields['f_nacimiento'];
 					$sexo=$res_hid->fields['sexo'];
+					$edad=$res_hid->fields['edad'];
 					$domicilio=$res_hid->fields['domicilio'];
 					$localidad=$res_hid->fields['localidad'];
 					$departamento=$res_hid->fields['departamento'];
-					$rural=$res_hid->fields['departamento'];
+					$rural=$res_hid->fields['rural'];
 					$domestica=$res_hid->fields['domestica'];
 					$profesional=$res_hid->fields['profesional'];
 					$otros=$res_hid->fields['otros'];
@@ -138,7 +139,7 @@ function buscar_combo(obj)
 <input type="hidden" value="<?=$id_hidat?>" name="id_hidat">
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
-<table width="85%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
+<table width="95%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
  <tr id="mo">
     <td>
     	<?
@@ -154,7 +155,7 @@ function buscar_combo(obj)
     </td>
  </tr>
 
- <tr><td><table width=90% align="center" class="bordes">
+ <tr><td><table width=95% align="center" class="bordes">
      <tr>
       <td id=mo colspan="2">
        <b> Datos del Profesional Denunciante </b>
@@ -182,21 +183,27 @@ function buscar_combo(obj)
             <td align='left'>
               <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
             </td>
-          </tr>  
-	</table></div></td></tr> 
-    <tr><td colspan=9><div><table width=75% align="center" >     
-        <tr>
-         	<td align="right">
+			<td align="right">
          	  <b>DNI Nº:</b>
          	</td>         	
             <td align='left'>
               <input type="text" size="20" value="<?=$dni_prof;?>" name="dni_prof" >
             </td>
-            <td align="right">
-         	  <b>Matricula Nº:</b>
+          </tr>  
+	</table></div></td></tr> 
+    <tr><td colspan=9><div><table width=100% align="center" >     
+        <tr>
+         	<td align="right">
+         	  <b>Edad:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="20" value="<?=$matricula;?>" name="matricula" >
+              <input type="text" size="20" value="<?=$edad;?>" name="edad" >
+            </td>
+            <td align="right">
+         	  <b>Sexo (M/F):</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="5" value="<?=$sexo;?>" name="sexo" >
             </td>
             <td align="right">
 				<b>Fecha de Nacimiento:</b> 
@@ -207,7 +214,201 @@ function buscar_combo(obj)
 		 </tr>
 	</table></div></td></tr>
 	
+    <tr><td colspan=9><div><table width=100% align="center" >     
+        <tr>
+         	<td align="left">
+         	  <b>Domicilio:</b>
+         	
+              <input type="text" size="75" value="<?=$domicilio;?>" name="domicilio" >
+            </td>
+            <td align="left">
+         	  <b>Localidad:</b>
+         	
+              <input type="text" size="20" value="<?=$localidad;?>" name="localidad" >
+            </td>
+		 </tr>
+    </table></div></td></tr>
 
+	<tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>Departamento:</b>
+         	
+              <input type="text" size="20" value="<?=$departamento;?>" name="departamento" >
+            </td>
+		 <td align="left">
+				<b>Ocupacion (Rural/Domestica/Profesional/Otros) detallar:</b>
+         	
+              <input type="text" size="40" value="<?=$rural;?>" name="rural" >
+            </td>
+		</tr>
+	</table></div></td></tr>
+	
+	 <tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>GRUPO FAMILIAR Y TENECIA DE PERROS</b>
+	           </td>
+	         </tr>
+     </table></td></tr>
+	
+	<tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>Cant. Hombres Menores a 1 Año:</b>
+				<input type="text" size="4" value="<?=$mn_unoh;?>" name="mn_unoh" >
+            </td>
+			<td align="left">
+				<b>Cant. Mujeres Menores a 1 Año:</b>
+				<input type="text" size="4" value="<?=$mn_unom;?>" name="mn_unom" >
+            </td>
+			<td align="left">
+				<b>Cant. Hombres de 1 a 15 Años:</b>
+				<input type="text" size="4" value="<?=$mna_qh;?>" name="mna_qh" >
+            </td>
+			<td align="left">
+				<b>Cant. Mujeres de 1 a 15 Años:</b>
+				<input type="text" size="4" value="<?=$mna_qm;?>" name="mna_qm" >
+            </td>
+		</tr>
+	</table></div></td></tr>
+
+	<tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>Cant. Hombres Mayores a 15 Años:</b>
+				<input type="text" size="4" value="<?=$my_qh;?>" name="my_qh" >
+            </td>
+			<td align="left">
+				<b>Cant. Mujeres Mayores a 15 Años:</b>
+				<input type="text" size="4" value="<?=$my_qm;?>" name="my_qm" >
+            </td>
+			<td align="left">
+				<b>Cant. Perros en el establecimiento:</b>
+				<input type="text" size="4" value="<?=$cant_perros;?>" name="cant_perros" >
+            </td>			
+		</tr>
+	</table></div></td></tr>
+
+	<tr><td colspan=9><div><table width=100% align="center" >  
+		<tr>
+			<td align="left">
+				<b>Estos Perros Comen? (detallar):</b>
+				<input type="text" size="80" value="<?=$p_comen;?>" name="p_comen" >
+            </td>
+		</tr>		
+	</table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>POBLACION ANIMAL</b>
+	           </td>
+	         </tr>
+     </table></td></tr>
+	 
+	<tr><td colspan=9><div><table width=100% align="center" >  
+	 	<tr>
+			<td align="left">
+				<b>Si es un establecimiento RURAL detallar tipos de animales:</b>
+				<input type="text" size="130" value="<?=$ovino;?>" name="ovino" >
+            </td>
+		</tr>		
+	</table></div></td></tr>
+		
+	<tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>DATOS DE LA ENFERMEDAD</b>
+	           </td>
+	         </tr>
+     </table></td></tr>
+
+	
+	<tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>Fecha de primeros sintomas o Diagnostico:</b>
+				<input type="text" size="10" value="<?=$f_sintoma;?>" name="f_sintoma" >
+            </td>
+			<td align="left">
+				<b>Breve Descripción clínica:</b>
+				<input type="text" size="100" value="<?=$descrip;?>" name="descrip" >
+            </td>
+		</tr>
+		<tr>
+			<td align="left">
+				<b>Terapeutica Medica:</b>
+				<input type="text" size="40" value="<?=$tmedico;?>" name="tmedico" >
+            </td>
+			<td align="left">
+				<b>Terapeutica Quirurgica:</b>
+				<input type="text" size="100" value="<?=$tquirurgico;?>" name="tquirurgico" >
+            </td>
+		</tr>
+	</table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>DIAGNOSTICO</b>
+	           </td>
+	         </tr>
+     </table></td></tr>
+	 
+	 <tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>DD5:</b>
+				<input type="text" size="25" value="<?=$dd5;?>" name="dd5" >
+            </td>
+			<td align="left">
+				<b>Contrainmunoelectroforesis:</b>
+				<input type="text" size="25" value="<?=$contraief;?>" name="contraief" >
+            </td>
+            <td align="left">
+				<b>Inmunoectroforesis:</b>
+				<input type="text" size="25" value="<?=$inmunoef;?>" name="inmunoef" >
+            </td>
+		</tr>
+		<tr>
+			<td align="left">
+				<b>Imagenes ECO:</b>
+				<input type="text" size="40" value="<?=$ecografia;?>" name="ecografia" >
+            </td>
+			<td align="left">
+				<b>Imagenes TAC:</b>
+				<input type="text" size="40" value="<?=$tac;?>" name="tac" >
+            </td>
+		</tr>
+	</table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>NOTIFICACION</b>
+	           </td>
+	         </tr>
+     </table></td></tr>
+	
+	<tr><td colspan=9><div><table width=100% align="center" >  
+       	<tr>
+		 	<td align="left">
+				<b>Fecha Notificacion:</b>
+				<input type="text" size="15" value="<?=$f_notificacion;?>" name="f_notificacion" >
+            </td>
+			<td align="left">
+				<b>Medidas Adoptadas:</b>
+				<input type="text" size="80" value="<?=$medidas;?>" name="medidas" >
+            </td>
+		</tr>
+		<tr>
+            <td align="left" colspan=4>
+				<b>Observaciones:</b>
+				<input type="text" size="140" value="<?=$obs;?>" name="obs" >
+            </td>
+		</tr>
+	</table></div></td></tr>
        
 <?if ($id_hidat){?>
 		 <table border="1" align="center" width="100%">   
