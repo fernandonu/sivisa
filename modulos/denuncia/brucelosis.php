@@ -96,9 +96,9 @@ echo $html_header;
 
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){ 
-	 if(document.all.n_prof.value==""){
-	  	alert('Debe ingresar el Nombre del Profesional');
-	  	document.all.n_prof.focus();
+	 if(document.all.ape_pac.value==""){
+	  	alert('Debe ingresar el Apellido');
+	  	document.all.ape_pac.focus();
 	  	return false;
 	 } 
 	
@@ -466,7 +466,7 @@ function buscar_combo(obj)
 	  <tr><td><table width=100% align="center" class="bordes">
 	 	<tr>
 		    <td align="center">
-		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" >&nbsp;&nbsp;
+		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()" >&nbsp;&nbsp;
 		    </td>
 	  </table></td></tr>
 

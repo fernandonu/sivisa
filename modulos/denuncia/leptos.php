@@ -4,67 +4,6 @@ extract($_POST,EXTR_SKIP);
 if ($parametros) extract($parametros,EXTR_OVERWRITE);
 cargar_calendario();
 
-if ($_POST['guardar_editar']=='Guardar'){
-	$db->StartTrans();
-  	$usuario=$_ses_user['name'];
-		 
-				$f_nacimiento=Fecha_db($f_nacimiento);	
-				if ($f_psintoma!='')$f_psintoma=Fecha_db($f_psintomaotif);else $f_psintoma='1000-01-01';
-				if ($f_internacion!='')$f_internacion=Fecha_db($f_internacion);else $f_internacion='1000-01-01';		
-				if ($f_muestra!='')$f_muestra=Fecha_db($f_muestra);else $f_muestra='1000-01-01';	
-				if ($f_notificacion!='')$f_notificacion=Fecha_db($f_notificacion);else $f_notificacion='1000-01-01';
-				
-		   		$query="update epi.leptospirosis set
-						ape_pac='$ape_pac',
-						nom_pac='$nom_pac',
-						f_nacimiento='$f_nacimiento',
-						sexo='$sexo',
-						domicilio='$domicilio',
-						localidad='$localidad',
-						departamento='$departamento',
-						trurales='$trurales',
-						e_frogorifico='$e_frogorifico',
-						obrero='$obrero',
-						otro='$otro',
-						f_psintoma='$f_psintoma',
-						f_internacion='$f_internacion',
-						f_muestra='$f_muestra',
-						ictericia='$ictericia',
-						cefalea='$cefalea',
-						s_mengeo='$s_mengeo',
-						iconjuntivalbilat='$iconjuntivalbilat',
-						fiebre='$fiebre',
-						mialgias='$mialgias',
-						ers1hs='$ers1hs',
-						leucositosis='$leucositosis',
-						neutrofilia='$neutrofilia',
-						uremia='$uremia',
-						bili_direc='$bili_direc',
-						tgp='$tgp',
-						cpk='$cpk',
-						a_domestico='$a_domestico',
-						roedores='$roedores',
-						rio_arroyo='$rio_arroyo',
-						laguna='$laguna',
-						alcantarilla='$alcantarilla',
-						inundacion='$inundacion',
-						f_notificacion='$f_notificacion',
-						semana_epi='$semana_epi',
-						esablecimiento='$esablecimiento',
-						serologia='$serologia',
-						positividad='$positividad',
-						titulo='$titulo',
-						aislamiento='$aislamiento',
-						obs='$obs',
-						desempleado='$desempleado'
-				where id_leptosp=$id_leptosp";	
-			
-			    sql($query, "Error actualizar registro") or fin_pagina();
-			    $accion="Los datos se actualizaron";  
-			    
-    $db->CompleteTrans();    
-  
-}
 
 if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
