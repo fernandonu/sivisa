@@ -5,88 +5,46 @@ extract($_POST,EXTR_SKIP);
 if ($parametros) extract($parametros,EXTR_OVERWRITE);
 cargar_calendario();
 
-if ($_POST['guardar_editar']=='Guardar'){
- $db->StartTrans();
-				$f_nacimiento=Fecha_db($f_nacimiento);
-				if ($f_sintoma!='')$f_sintoma=Fecha_db($f_sintoma);else $f_sintoma='1000-01-01';	
-				if ($f_notificacion!='')$f_notificacion=Fecha_db($f_notificacion);else $f_notificacion='1000-01-01';			
-		
-			   $query="update epi.hidatidosis set
-							ape_pac='$ape_pac',
-							nom_pac='$nom_pac',
-							f_nacimiento='$f_nacimiento',
-							sexo='$sexo',
-							domicilio='$domicilio',
-							localidad='$localidad',
-							departamento='$departamento',
-							rural='$rural',
-							domestica='$domestica',
-							profesional='$profesional',
-							otros='$otros',
-							mn_unoh='$mn_unoh',
-							mn_unom='$mn_unom',
-							mna_qh='$mna_qh',
-							mna_qm='$mna_qm',
-							my_qh='$my_qh',
-							my_qm='$my_qm',
-							cant_perros='$cant_perros',
-							p_comen='$p_comen',
-							ovino='$ovino',
-							bovino='$bovino',
-							pocino='$pocino',
-							equino='$equino',
-							f_sintoma='$f_sintoma',
-							descrip='$descrip',
-							tmedico='$tmedico',
-							tquirurgico='$tquirurgico',
-							dd5='$dd5',
-							contraief='$contraief',
-							inmunoef='$inmunoef',
-							ecografia='$ecografia',
-							tac='$tac',
-							f_notificacion='$f_notificacion',
-							medidas='$medidas',
-							obs='$obs
-					where id_hidat=$id_hidat";
-		
-  $db->CompleteTrans();    
-}//fin guardar_editart5
 
-if ($_POST['guardart']=='Guardar'){
+if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
-	$usuario=$_ses_user['name'];	
-				$f_nacimiento=Fecha_db($f_nacimiento);
-				if ($f_sintoma!='')$f_sintoma=Fecha_db($f_sintoma);else $f_sintoma='1000-01-01';	
-				if ($f_notificacion!='')$f_notificacion=Fecha_db($f_notificacion);else $f_notificacion='1000-01-01';
-				
+	$usuario=$_ses_user['name'];				
 		$query="insert into epi.hidatidosis
 					(id_hidat,id_denuncia,ape_pac,nom_pac,f_nacimiento,sexo,domicilio,localidad,departamento,rural,domestica,profesional,otros,mn_unoh,mn_unom,
 					mna_qh,mna_qm,my_qh,my_qm,cant_perros,p_comen,ovino,bovino,pocino,equino,f_sintoma,descrip,tmedico,tquirurgico,
-					dd5,contraief,inmunoef,ecografia,tac,f_notificacion,medidas,obs;
-					)
-					Values(nextval('epi.hidatidosis_id_hidat_seq'),'$id_denuncia',
+					dd5,contraief,inmunoef,ecografia,tac,f_notificacion,medidas,obs)
+					Values
+					(nextval('epi.hidatidosis_id_hidat_seq'),'$id_denuncia',
 					'$ape_pac','$nom_pac','$f_nacimiento','$sexo','$domicilio','$localidad','$departamento','$rural','$domestica','$profesional','$otros','$mn_unoh','$mn_unom',
 					'$$mna_qh','$mna_qm','$my_qh','$my_qm','$cant_perros','$p_comen','$ovino','$bovino','$pocino','$equino','$f_sintoma','$descrip','$tmedico','$tquirurgico',
-					'$$dd5','$contraief','$inmunoef','$ecografia','$tac','$f_notificacion','$medidas','$obs)";
+					'$$dd5','$contraief','$inmunoef','$ecografia','$tac','$f_notificacion','$medidas','$obs')";
 		 sql($query, "Error al insertar t3") or fin_pagina();
 		 $accion="Los datos se han guardado correctamente"; 
 	
 	     $db->CompleteTrans();
 }//fin guardart5
 
-if ($id_id_hidat) {
+if ($_POST['borrar']=='Borrar'){
+
+	$query="delete from epi.hidatidosis
+			where id_hidat='$id_hidat'";
+	
+	sql($query, "Error al eliminar el registro") or fin_pagina(); 
+	
+	$accion="Los datos se han borrado";
+}
+
+$sql_den="select id_hidat from epi.hidatidosis where id_denuncia=$id_denuncia";
+$res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
+if ($res_den->recordcount()>0) $id_hidat=$res_den->fields['id_hidat'];
+
+if ($id_hidat) {
 			
-		$q_hid="SELECT DISTINCT *
-					epi.hidatidosis 
-					where epi.hidatidosis.id_denuncia = $id_denuncia
-					ORDER BY
-					epi.hidatidosis.id_hidat DESC";
-			$res_hid=sql($q_hid, "Error consulta t2") or fin_pagina();
-			if($res_hid->RecordCount()!=0){
-					$id_hidat=$res_hid->fields['$id_hidat'];
+		$q_hid="select * from epi.hidatidosis where id_denuncia=$id_denuncia";
+		$res_hid=sql($q_hid, "Error consulta t2") or fin_pagina();
 					$ape_pac=$res_hid->fields['ape_pac'];
 					$nom_pac=$res_hid->fields['nom_pac'];
-					$f_nacimiento=fecha($res_hid->fields['f_nacimiento']);
+					$f_nacimiento=$res_hid->fields['f_nacimiento'];
 					$sexo=$res_hid->fields['sexo'];
 					$domicilio=$res_hid->fields['domicilio'];
 					$localidad=$res_hid->fields['localidad'];
@@ -107,7 +65,7 @@ if ($id_id_hidat) {
 					$bovino=$res_hid->fields['bovino'];
 					$pocino=$res_hid->fields['pocino'];
 					$equino=$res_hid->fields['equino'];
-					$f_sintoma=fecha($res_hid->fields['f_sintoma']);
+					$f_sintoma=$res_hid->fields['f_sintoma'];
 					$descrip=$res_hid->fields['descrip'];
 					$tmedico=$res_hid->fields['tmedico'];
 					$tquirurgico=$res_hid->fields['tquirurgico'];
@@ -116,16 +74,30 @@ if ($id_id_hidat) {
 					$inmunoef=$res_hid->fields['inmunoef'];
 					$ecografia=$res_hid->fields['ecografia'];
 					$tac=$res_hid->fields['tac'];
-					$f_notificacion=fecha($res_hid->fields['f_notificacion']);
+					$f_notificacion=$res_hid->fields['f_notificacion'];
 					$medidas=$res_hid->fields['medidas'];
 					$obs=$res_hid->fields['obs'];
-			}	
 }//fin id_denuncia
 
 echo $html_header;
 ?>
 <script>
-
+//controlan que ingresen todos los datos necesarios par el muleto
+function control_nuevos(){
+		 if(document.all.nom_pac.value==""){
+		  	alert('Debe ingresar el Nombre');
+		  	document.all.nom_pac.focus();
+		  	return false;
+		 } 
+		 if(document.all.ape_pac.value==""){
+		  	alert('Debe ingresar Apellido');
+		 	document.all.ape_pac.focus();
+			return false;
+		 } 		 
+	
+ if (confirm('Confirma agregar datos?'))return true;
+	 else return false;	
+}//de function control_nuevos()
 
 //funciones para busqueda abreviada utilizando teclas en la lista que muestra los clientes.
 var digitos=10; //cantidad de digitos buscados
@@ -162,7 +134,8 @@ function buscar_combo(obj)
 
 </script>
 
-<form name='form1' action='den_ad.php' method='POST' enctype='multipart/form-data'>
+<form name='form1' action='hidatidosis.php' method='POST' enctype='multipart/form-data'>
+<input type="hidden" value="<?=$id_hidat?>" name="id_hidat">
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="85%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
@@ -201,13 +174,13 @@ function buscar_combo(obj)
          	  <b>Nombre:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="50" value="<?=$n_prof;?>" name="n_prof" <? if ($id_denuncia) echo "disabled"?>>
+              <input type="text" size="50" value="<?=$nom_pac;?>" name="nom_pac" >
             </td>
             <td align="right">
          	  <b>Apellido:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="50" value="<?=$a_prof;?>" name="a_prof" <? if ($id_denuncia) echo "disabled"?>>
+              <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
             </td>
           </tr>  
 	</table></div></td></tr> 
@@ -217,40 +190,44 @@ function buscar_combo(obj)
          	  <b>DNI Nº:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="20" value="<?=$dni_prof;?>" name="dni_prof" <? if ($id_denuncia) echo "disabled"?>>
+              <input type="text" size="20" value="<?=$dni_prof;?>" name="dni_prof" >
             </td>
             <td align="right">
          	  <b>Matricula Nº:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="20" value="<?=$matricula;?>" name="matricula" <? if ($id_denuncia) echo "disabled"?>>
+              <input type="text" size="20" value="<?=$matricula;?>" name="matricula" >
             </td>
             <td align="right">
-				<b>Fecha de Notificacion:</b> 
+				<b>Fecha de Nacimiento:</b> 
 			</td>         	
 			<td align='left'>
-				<input type=text id=fecha_notif name='fecha_notif' value='<?if($fecha_notif=="01/01/1000")echo""; else echo $fecha_notif;?>' size=15 title="Fecha de Notificacion">
-				<?=link_calendario("fecha_notif");?>
+				<input type=text id=fecha_notif name='f_nacimiento' value='<?=$f_nacimiento;?>' size=15 title="Fecha de Nacimiento">
 			</td>
 		 </tr>
 	</table></div></td></tr>
 	
 
        
-<table border="1" align="center" width="100%">
-	<tr>
-	   <td align="center">
-   		<? if($id_denuncia){ ?>
-			      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-		   <?}else {?>
-			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-		 <? } ?>
-	    </td>
-	</tr> 
-</table>
+<?if ($id_hidat){?>
+		 <table border="1" align="center" width="100%">   
+		 <tr>
+		    <td align="center">
+		      <input type="submit" name="borrar" value="Borrar" style="width=130px" onclick="return confirm('Esta seguro que desea eliminar')" >
+		    </td>
+		 </tr> 
+		 </table> 	
+	 <?}
+	 else {?>
+			<table border="1" align="center" width="100%">   
+	 	    <tr>
+		    <td align="center">
+		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+		    </td>
+			</table> 
+	 
+	 <? } ?>
 	
-
-
 <table border="1" align="center" width="100%">
 	<tr>
 	   <td align="center">
