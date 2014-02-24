@@ -67,7 +67,8 @@ if ($_POST['guardar_editar']=='Guardar'){
 						   	vac_antibrucelosa='$vac_antibrucelosa',
 						   	leche='$leche',
 						   	leche_cruda='$leche_cruda',
-							obs='$obs'
+							obs='$obs',
+							lugart='$lugart'
 					where id_bucelosis=$id_bucelosis";	
 			
 			   
@@ -94,18 +95,18 @@ if ($_POST['guardar']=='Guardar'){
 		$query="insert into epi.brucellosis
 			   	(id_bucelosis, id_denuncia, ape_pac, nom_pac, f_nacimiento,sexo,domicilio,localidad,departamento,dias_com,subito,insidioso,desc_clinica,terap_esp,primera_dosis,ultima_dosis,prev_diag, primer_diag, direc_fdiag,
 			   	f_huddlesson,res_huddlesson, lab_huddlesson, f_tsinme,res_tsinme, lab_tsinme, f_tconme,res_tconme,lab_tconme,f_rbengala,res_rbengala,lab_rbengala,f_fcomplem, res_fcomplem,lab_fcomplem,f_pcombs,res_pcombs,lab_pcombs,
-			   	dom_t, oc_previa,contacto_animal,esp_bovino,esp_cerdo,esp_cabras,esp_otros,vac_antibrucelosa,leche,leche_cruda,obs)
+			   	dom_t, oc_previa,contacto_animal,esp_bovino,esp_cerdo,esp_cabras,esp_otros,vac_antibrucelosa,leche,leche_cruda,obs, lugart)
 			   	values
 			    (nextval('epi.brucellosis_id_bucelosis_seq'), '$id_denuncia','$ape_pac', '$a_prop', '$f_nacimiento', '$sexo', '$domicilio', '$localidad', '$departamento', '$dias_com','$subito',
 			    '$insidioso','$desc_clinica','$terap_esp','$primera_dosis','$ultima_dosis','$prev_diag','$primer_diag','$direc_fdiag','$f_huddlesson','$res_huddlesson','$lab_huddlesson',
 			    '$f_tsinme','$res_tsinme','$lab_tsinme',
 			    '$f_tconme','$res_tconme','$lab_tconme','$f_rbengala','$res_rbengala','$lab_rbengala','$f_fcomplem','$res_fcomplem','$lab_fcomplem','$f_pcombs','$res_pcombs','$lab_pcombs','$dom_t',
-			    '$oc_previa','$contacto_animal','$esp_bovino','$esp_cerdo','$esp_cabras','$esp_otros','$vac_antibrucelosa','$leche','$leche_cruda','$obs')";
+			    '$oc_previa','$contacto_animal','$esp_bovino','$esp_cerdo','$esp_cabras','$esp_otros','$vac_antibrucelosa','$leche','$leche_cruda','$obs','$lugart')";
 				
 			   sql($query, "Error al insertar t2") or fin_pagina();
 			   $accion="Los datos se han guardado correctamente"; 
-		
-	if($$id_bucelosis){
+}	
+if($$id_bucelosis){
 			$q_bruc="SELECT DISTINCT *
 					epi.brucellosis 
 					where epi.brucellosis.id_denuncia = $id_denuncia
@@ -160,6 +161,7 @@ if ($_POST['guardar']=='Guardar'){
 				    $leche=$res_bruc->fields['leche'];
 				    $leche_cruda=$res_bruc->fields['leche_cruda'];	
 					$obs=$res_bruc->fields['obs'];
+					$lugart=$res_bruc->fields['lugart'];
 			}	
 }//fin $id_bucelosis
 
@@ -174,37 +176,7 @@ function control_nuevos(){
 	  	document.all.n_prof.focus();
 	  	return false;
 	 } 
-	 if(document.all.a_prof.value==""){
-	  	alert('Debe ingresar Apellido');
-	 	document.all.a_prof.focus();
-		return false;
-	 } 
-	 if(document.all.matricula.value==""){
-	  alert('Debe ingresar Matricula');
-	  document.all.matricula.focus();
-	  return false;
-	 	} 
-	 if(document.all.dni_prof.value==""){
-	  alert('Debe ingresar Numero de documento');
-	  document.all.dni_prof.focus();
-	  return false; 
-	 } 
-	 if(document.all.fecha_notif.value==""){
-	  alert('Debe ingresar Fecha');
-	  document.all.fecha_notif.focus();
-	  return false;
-	 	} 
-	 
-	 if(document.all.id_veterinaria.value==-1 ){
-		alert('Debe ingresar Veterinaria');
-		document.all.id_veterinaria.focus();
-		return false;
-		}
-	if(document.all.id_tabla.value==-1 ){
-		alert('Debe ingresar Tipo de Ficha');
-		document.all.id_tabla.focus();
-		return false;
-		}
+	
  if (confirm('Esta Seguro que Desea Agregar Registro?'))return true;
 	 else return false;	
 }//de function control_nuevos()
@@ -279,145 +251,14 @@ function buscar_combo(obj)
 	           </td>
 	         </tr>
     </table></td></tr>	     
-      <tr><td colspan=9><div ><table width=55% align="left" >
-          <tr>         
-	           <td align="right" colspan="2">
-	            <b> DATOS DEL PROPIETARIO </b>
+    <tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b> DATOS PERSONALES </b>
 	           </td>
 	         </tr>
-    	</table></td></tr>	 
-   <tr><td colspan=9><div ><table width=55% align="left" >     
-   
-   <tr><td colspan=9><div ><table width=100% align="center" >
-          <tr>
-         	<td align="right">
-         	  <b>Nombre:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="50" value="<?=$n_prof;?>" name="n_prof" <? if ($id_denuncia) echo "disabled"?>>
-            </td>
-            <td align="right">
-         	  <b>Apellido:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="50" value="<?=$a_prof;?>" name="a_prof" <? if ($id_denuncia) echo "disabled"?>>
-            </td>
-          </tr>  
-	</table></div></td></tr> 
-    <tr><td colspan=9><div><table width=75% align="center" >     
-        <tr>
-         	<td align="right">
-         	  <b>DNI Nº:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="20" value="<?=$dni_prof;?>" name="dni_prof" <? if ($id_denuncia) echo "disabled"?>>
-            </td>
-            <td align="right">
-         	  <b>Matricula Nº:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="20" value="<?=$matricula;?>" name="matricula" <? if ($id_denuncia) echo "disabled"?>>
-            </td>
-            <td align="right">
-				<b>Fecha de Notificacion:</b> 
-			</td>         	
-			<td align='left'>
-				<input type=text id=fecha_notif name='fecha_notif' value='<?if($fecha_notif=="01/01/1000")echo""; else echo $fecha_notif;?>' size=15 title="Fecha de Notificacion">
-				<?=link_calendario("fecha_notif");?>
-			</td>
-		 </tr>
-	</table></div></td></tr>
-	<tr><td colspan=9><div ><table width=100% align="center" >     
-		<tr>
-	          	<td align="right">
-					<b>Veterinaria:</b>
-				</td>
-				<td align='left'>
-            		<select name=id_veterinaria Style="width=757px" <?if ($id_denuncia) echo 'disabled'?>>
-							<option value=-1>Seleccione</option>
-							<?$query10="SELECT DISTINCT *
-										FROM epi.veterinarias
-										ORDER BY
-										epi.veterinarias.localidad ASC,
-										epi.veterinarias.nom_veterinaria ASC";
-								$res_10=sql($query10,"Error en consulta Nº 2");?>	
-							 <? while (!$res_10->EOF){
-									$id_veterinaria_temp=$res_10->fields['id_veterinaria'];
-									$nom_veterinaria=$res_10->fields['localidad']." - ".$res_10->fields['nom_veterinaria'] ;?>
-									<option value='<?=$id_veterinaria_temp?>' <? if(trim($id_veterinaria_temp)==trim($id_veterinaria))echo "selected"?>><?=$nom_veterinaria?></option>
-									<?$res_10->movenext();
-								}?>
-					</select>
-            	</td>
-		 </tr>
-		 <tr>
-          <td align="right">
-				<b>Tipo de Ficha:</b>
-			</td>
-			<td align='left'>
-             <select name=id_tabla Style="width=757px" <?if ($id_denuncia) echo 'disabled'?>>
-							<option value=-1>Seleccione</option>
-							<?$query10="SELECT DISTINCT *
-										FROM
-										epi.ficha_epi
-										ORDER BY
-										epi.ficha_epi.descripcion ASC";
-								$res_10=sql($query10,"Error en consulta Nº 2");?>	
-							 <? while (!$res_10->EOF){
-									$id_tabla_temp=$res_10->fields['id_tabla'];
-									$descripcion=$res_10->fields['descripcion'];?>
-									<option value='<?=$id_tabla_temp?>' <? if(trim($id_tabla_temp)==trim($id_tabla))echo "selected"?>><?=$descripcion?></option>
-									<?$res_10->movenext();
-								}?>
-					</select>
-            </td>
-		 </tr>
-	  <tr>
-         
-	</table></div></td></tr> 
-
-       
-<table border="1" align="center" width="100%">
-	<tr>
-	   <td align="center">
-   		<? if($id_denuncia){ ?>
-			      <input type=button name="editar" value="Editar" onclick="editar_campos()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
-			      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
-		   <?}else {?>
-			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
-		 <? } ?>
-	    </td>
-	</tr> 
-</table>
-	
-<table border="1" align="center" width="100%">
-	<tr>
-	   <td align="center">
-   		<? if($id_tabla==5){ 
-				$ref = encode_link("brus_can.php",array("id_denuncia"=>$id_denuncia,"pagina"=>"den_ad"));		   		
-    			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="Bruc_can" value="Brocelosis Canina" onclick'<?=$onclick_ir;?>' title="Ficha de Brucelosis Canina" style="width=150px"> 
-		 <? } ?>
-	    </td>
-	</tr> 
-</table>
-
-<? if($id_tabla==1){//leptospirosis	?>
-<tr><td><table width=90% align="center" class="bordes">
-     <tr>
-      <td id=mo colspan="2">
-       <b> FICHA DE LEPTOSPIROSIS <?=$id_leptosp;?> </b>
-      </td>
-     </tr>
-     <tr><td><table>
-	         <tr>	           
-	           <td align="right" colspan="2">
-	            <b> DATOS DEL PACIENTE </b>
-	           </td>
-	         </tr>
-    	</table></td></tr>	 
-   <tr><td colspan=9><div ><table width=75% align="left" >
+    	</table></td></tr> 
+   <tr><td colspan=9><div ><table width=95% align="left" >
           <tr>
          	<td align="left">
          	  <b>Nombre:</b>
@@ -429,7 +270,7 @@ function buscar_combo(obj)
             </td>
           </tr>  
 	 </table></div></td></tr>
-	 <tr><td colspan=9><div ><table width=75% align="left" >     
+	 <tr><td colspan=9><div ><table width=95% align="left" >     
         <tr>
          <td align="right">
          	  <b> Fecha de Nacimiento:</b>
@@ -440,11 +281,11 @@ function buscar_combo(obj)
          	  <b>Sexo:</b>
       					<input type="radio" name="sexo" value="F" checked>Femenino
 						<input type="radio" name="sexo" value="M">Masculino
-					</td>
-            </td>
+			</td>
+           
 		 </tr>
 	</table></div></td></tr>	    
-	  <tr><td colspan=9><div ><table width=75% align="left" >     
+	  <tr><td colspan=9><div ><table width=95% align="left" >     
         <tr>
          	<td align="left">
          	  <b>Domicilio:</b>
@@ -466,94 +307,235 @@ function buscar_combo(obj)
 		 </tr>
 	</table></div></td></tr>	    
    
-	<tr><td colspan=9><div ><table width=75% align="left" >     
-        <tr>
-               	<td align="left">
-					<b>Ocupacion: Tareas Rurales:</b>
-				
-							<input type="radio" name="trurales" value="S" checked>Si
-							<input type="radio" name="trurales" value="N">No
-	            </td>
-            	<td align="left">
-					<b>Empleado en Frigorifico:</b>
-				
-							<input type="radio" name="e_frogorifico" value="S" checked>Si
-							<input type="radio" name="e_frogorifico" value="N">No
+	 <tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>ENFERMEDAD ACTUAL </b>
+	           </td>
+	         </tr>
+    	</table></td></tr>  
+   
+	<tr><td colspan=9><div ><table width=65% align="left" >   
+		<tr>
+            <td align="left">
+         	  <b>Dias aproximados de comienzo:</b>
+         	</td>         	
+            <td align='left'>
+              <input type="text" size="15" value="<?=$dias_com;?>" name="dias_com" <? if ($id_bucelosis) echo "disabled"?>>
+            </td>
+             <td align="left">
+         	 <b>Subito:</b>
+				<input type="checkbox" name="subito" value="S" >
+			</td>
+            <td align="left">
+         	   <b>Insidioso:</b>
+				<input type="checkbox" name="insidioso" value="S" >
+            </td>
+		 </tr>
+	</table></div></td></tr> 
+	 <tr><td colspan=9><div ><table width=95% align="left" >     
+        	<tr>
+               	<td align="right">	 
+					<b>Breve descripcion Clinica:</b>
 				</td> 
-				<td align='left'>
-				<b>Desempleado:</b>
-						<input type="checkbox" name="desempleado" value="S" >
+				<td align="left"> 
+					<textarea cols='100' rows='4' name='desc_clinica'  <? if($id_bruc_can) echo "disabled"?>><?=$desc_clinica;?></textarea>
 	            </td>
-		</tr>
-	</table></div></td></tr>	    
-   
-	<tr><td colspan=9><div ><table width=75% align="left" >     
+			</tr>
+			 <tr><td colspan=9><div ><table width=95% align="left" >     
+               	<td align="right">	 
+					<b>Terapeutica especifica:</b>
+				</td> 
+				<td align="left"> 
+					<textarea cols='50' rows='4' name='terap_esp'  <? if($id_bruc_can) echo "disabled"?>><?=$terap_esp;?></textarea>
+	            </td>
+	            <td align="right">
+	         	  <b> Fecha 1º Dosis:</b>
+	         	</td> 
+				<td align="left">
+	             <input type='text' name='primera_dosis' value='<?=$primera_dosis;?>' size=10 align='right' ></b>
+	           </td>
+	           <td align="right">
+	         	  <b> Ultima Dosis:</b>
+	         	</td> 
+				<td align="left">
+	             <input type='text' name='ultima_dosis' value='<?=$ultima_dosis;?>' size=10 align='right' ></b>
+	           </td>
+			</table></div></td></tr>		
+	 </table></div></td></tr> 
+	 <tr><td colspan=9><div ><table width=95% align="left" >        
+	           <tr> 
+            	<td align="right">
+					<b>Ha sido este caso previamente diagnosticado:</b>
+				</td>  
+				<td align="left">
+							<input type="radio" name="prev_diag" value="S" checked>Si
+							<input type="radio" name="prev_diag" value="N">No
+				</td>
+				 <<td align="right">
+	         	  <b> Fecha 1º diagnostico:</b>
+	         	</td> 
+				<td align="left">
+	             <input type='text' name='primer_diag' value='<?=$primer_diag;?>' size=10 align='right' ></b>
+	           </td>
+	           
+				</tr>
+				<tr>
+				<td align="right">	 
+					<b>Direccion del paciente a la fecha del diagnostico:</b>
+				</td> 
+				<td align="left"> 
+					<textarea cols='75' rows='2' name='terap_esp'  <? if($id_bruc_can) echo "disabled"?>><?=$terap_esp;?></textarea>
+	            </td>
+				</tr>
+	</table></div></td></tr>		  
+  
+	
+  <tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>DIAGNOSTICO DE LABORATORIO </b>
+	           </td>
+	         </tr>
+  </table></td></tr>  
+   <tr><td colspan=7><div ><table width="65%" align="center" border="1" > 		
+   		<tr id=mo> 
+		    <td align=right id=mo width="20%" >Tipo de Prueba</a></td>   
+		    <td align=right id=mo><a id=mo >Fecha</a></td>      	
+		    <td align=right id=mo><a id=mo >Resultado</a></td>  
+		    <td align=right id=mo><a id=mo >Laboratorio</a></td>      	
+	 	</tr>
+   	
+   		<tr>
+   			<td id=me align="center" width="40%"><b>Huddlesson (con titulo)</b></td>
+   			<td><input type="text" size="15" value="<?=$f_huddlesson;?>" name="f_huddlesson" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_huddlesson;?>" name="res_huddlesson" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_huddlesson;?>" name="lab_huddlesson" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>
+   		<tr>
+   			<td id=me align="center" width="40%"><b>Prueba en Tubo- Sin 2 Me </b></td>
+   			<td><input type="text" size="15" value="<?=$f_tsinme;?>" name="f_tsinme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_tsinme;?>" name="res_tsinme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_tsinme;?>" name="lab_tsinme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>
+   		<tr>
+   			<td id=me align="center" width="40%"><b>Prueba en Tubo- Con 2 Me </b></td>
+   			<td><input type="text" size="15" value="<?=$f_tconme;?>" name="f_tconme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_tconme;?>" name="res_tconme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_tconme;?>" name="lab_tconme" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>
+   		<tr>
+   			<td id=me align="center" width="40%"><b>Rosa Bengala </b></td>
+   			<td><input type="text" size="15" value="<?=$f_rbengala;?>" name="f_rbengala" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_rbengala;?>" name="res_rbengala" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_rbengala;?>" name="lab_rbengala" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>
 		<tr>
-			<td align="left">
-				<b>Obrero:</b>
-				<input type="text" size="70" value="<?=$obrero;?>" name="obrero" <? if ($id_leptosp) echo "disabled"?>>
-            </td>
-            <td align="left">
-				<b>Otros:</b>
-				<input type="text" size="70" value="<?=$otro;?>" name="otro" <? if ($id_leptosp) echo "disabled"?>>
-			</td>         	
-		</tr>
-	</table></div></td></tr>	    
-   
-	<tr><td colspan=9><div ><table width=65% align="left" >   
+   			<td id=me align="center" width="40%"><b>F. Complemento</b></td>
+   			<td><input type="text" size="15" value="<?=$f_fcomplem;?>" name="f_fcomplem" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_fcomplem;?>" name="res_fcomplem" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_fcomplem;?>" name="lab_fcomplem" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>
+   		<tr>
+   			<td id=me align="center" width="40%"><b>P. de Coombs</b></td>
+   			<td><input type="text" size="15" value="<?=$f_pcombs;?>" name="f_pcombs" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="40" value="<?=$res_pcombs;?>" name="res_pcombs" <? if ($id_bucelosis) echo "disabled"?>></td>
+   			<td><input type="text" size="60" value="<?=$lab_pcombs;?>" name="lab_pcombs" <? if ($id_bucelosis) echo "disabled"?>></td>
+   		</tr>	 
+	 </table></td></tr> 	
+	
+  <tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            	<b>PROBABLE FUENTE DE INFECCION</b>
+	           </td>
+	      </tr>
+  </table></td></tr>	 
+<tr><td colspan=9><div ><table width=65% align="left" >   
 		<tr>
             <td align="left">
-         	  <b>Detalle Epidemiologico:</b>
+         	  <b>OCUPACION(Trabajo exacto, negocio o Industria al comienzo de la enfermedad):</b>
          	</td>         	
             <td align='left'>
-			      <textarea cols='100' rows='4' name='d_epidemio'  <? if($id_leptosp) echo "disabled"?>><?=$d_epidemio;?></textarea>
+              <input type="text" size="65" value="<?=$lugart;?>" name="lugart" <? if ($id_bucelosis) echo "disabled"?>>
             </td>
+            </tr>
+   		<tr>
+             <td align="left">
+         	 	<b>Direccion del Trabajo:</b>
+         	 </td>
+             <td align="left">
+				 <input type="text" size="65" value="<?=$dom_t;?>" name="dom_t" <? if ($id_bucelosis) echo "disabled"?>>
+			</td>
 		 </tr>
-		 </table></div></td></tr>	    
-   
-	<tr><td colspan=9><div ><table width=65% align="left" >   
 		 <tr>
-            <td align="left">
-         	  <b>Examenes de laboratorio:</b>
-         	</td>         	
-            <td align='left'>
-			      <textarea cols='100' rows='4' name='laboratorios'  <? if($id_leptosp) echo "disabled"?>><?=$laboratorios;?></textarea>
-            </td>
+             <td align="left">
+         	 	<b>Cambio de ocupacion dentro de los 6 meses de comienzo, indicar ocupacion previa:</b>
+         	 </td>
+         	 <td align="left">
+				 <input type="text" size="65" value="<?=$oc_previa;?>" name="oc_previa" <? if ($id_bucelosis) echo "disabled"?>>
+			</td>
+			 </tr>
+		 <tr>
+         	<td align="left">
+         	 	<b>Contacto con animales dentro de los 6 meses anteriores a la fecha del comienzo:</b>
+         	 </td>
+             <td align="left">
+					<input type="radio" name="contacto_animal" value="S" checked>Si 
+					<input type="radio" name="contacto_animal" value="N">No
+             		<input type="radio" name="contacto_animal" value="NS">No Sabe
+              </td>
+			</td>
 		 </tr>
-	</table></div></td></tr>	
+		 <tr>
+		 <td align="left">
+         	 	<b>Especificar tipo de animal y describir tipo de contacto, con fecha aproximada:</b>
+         	 </td>
+         	 <td align="left">
+				<textarea cols='75' rows='4' name='obs'<? if($id_bucelosis) echo "disabled"?>><?=$obs;?></textarea>
+			</td>
+		 </tr>
+</table></div></td></tr> 	 
 
+	 
 
-<table width=100% align="center" class="bordes">
- <? }//fin if $idtabla 
-	if($id_tabla==1 || $id_tabla==2 ||$id_tabla==3 || $id_tabla==4 || $id_tabla==5){?>
+	 	
+ </table>           
+<br>
+<?if ($id_bucelosis){?>
+<table class="bordes" align="center" width="100%">
+		 <tr>
+		    <td align="center">
+		      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+		      <input type="submit" name="borrar" value="Borrar" style="width=130px" onclick="return confirm('Esta seguro que desea eliminar')" >
+		    </td>
+		 </tr> 
+	 </table>	
+	
+	 <?}
+	 else {?>
+	 	<tr>
+		    <td align="center">
+		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+		    </td>
+	 
+	 <? } ?>
+	 
+ <tr><td><table width=100% align="center" class="bordes">
+  <tr align="center">
+   <td>
+     <input type=button name="volver" value="Volver" onclick="document.location='den_ad.php'"title="Volver al Listado" style="width=150px">     
+     </td>
+  </tr>
+ </table></td></tr>
  
- <table border="1" align="center" width="100%">
-	<tr>
-	   <td align="center">
-	   
-   		<? 
-   		 if($id_bruc_can || $id_lvc || $id_bucelosis || $id_hidat || $id_leptosp){ ?>
-			      <input type=button name="editar" value="Editar" onclick="editar_campost5()" title="Edita Campos" style="width=130px"> &nbsp;&nbsp;
-			      <input type="submit" name="guardar_editart5" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevost5()">&nbsp;&nbsp;
-			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
-		   <?}else {?>
-			      <input type="submit" name="guardart5" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevost5()">&nbsp;&nbsp;
-		 <? } ?>
-	    </td>
-	</tr> 
-</table>	
-<? }//if por ninguna ?>
-<table border="1" align="center" width="100%">
-	<tr>
-	   <td align="center">
-		     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=150px">     
-		     </td>
-	</tr> 
-</table>	
-
-</table></td></tr><?//table principal?> 	
-
-</table>
+ <tr><td><table width=100% align="center" class="bordes">
+  <tr align="center">
+   
+  </tr>  
+ </table></td></tr>
+ 
+ </table>
  </form>
  
  <?=fin_pagina();// aca termino ?>
