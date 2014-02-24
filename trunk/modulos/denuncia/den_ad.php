@@ -1,18 +1,20 @@
 <?
 require_once ("../../config.php");
-
+//print_r($_POST);
 extract($_POST,EXTR_SKIP);
 if ($parametros) extract($parametros,EXTR_OVERWRITE);
+if ($id_tabla=='')$id_tabla=$id_tabla_aux1; //lo uso para  no perder el dato de id_tabla
 cargar_calendario();
 
 if ($_POST['guardar_editar']=='Guardar'){
  $db->StartTrans();
- 	if ($fecha_notif!='')$fecha_notif=Fecha_db($fecha_notif);else $fecha_notif='1000-01-01';
+ 	
  	$n_prof=strtoupper($n_prof);     
    	$a_prof=strtoupper($a_prof);
-   	$matricula=strtoupper($matricula);
-  	$fecha_notif=fecha_db($fecha_notif);
-  $usuario=$_ses_user['name'];
+   	$matricula=strtoupper($matricula);	
+  	$fecha_notif=fecha_db($fecha_notif);	
+	$usuario=$_ses_user['name'];
+	
    $query="update epi.denuncia set 
 			n_prof='$n_prof',
 			a_prof='$a_prof',
@@ -131,11 +133,10 @@ function editar_campos(){
 	document.all.matricula.disabled=false;
 	document.all.dni_prof.disabled=false;
 	document.all.id_veterinaria.disabled=false;
-	document.all.id_tabla.disabled=false;
-
+	//document.all.id_tabla.disabled=false;
 	document.all.guardar_editar.disabled=false;
 	document.all.cancelar_editar.disabled=false;
-	document.all.borrar.disabled=false;
+	//document.all.borrar.disabled=false;
 	return true;
 }
 //de function control_nuevos()
@@ -180,7 +181,7 @@ function buscar_combo(obj)
 
 <form name='form1' action='den_ad.php' method='POST' enctype='multipart/form-data'>
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
-<input type="hidden" value="<?=$id_tabla?>" name="id_tabla">
+<input type="hidden" value="<?=$id_tabla?>" name="id_tabla_aux1">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="85%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
  <tr id="mo">
@@ -321,24 +322,28 @@ function buscar_combo(obj)
    		<? if($id_tabla==5){ 
 				$ref = encode_link("brus_can.php",array("id_denuncia"=>$id_denuncia,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="Bruc_can" value="Brocelosis Canina" onclick'<?=$onclick_ir;?>' title="Ficha de Brucelosis Canina" style="width=150px"> 
+ 				<input type=button name="Bruc_can" value="Brucelosis Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Brucelosis Canina" style="width=150px"> 
+		 
 		 <? }elseif ($id_tabla==1){ 
 				$ref = encode_link("leptos.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=submit name="leptospirosis" value="Leptospirosis" onclick'<?=$onclick_ir;?>' title="Ficha de Leptospirosis" style="width=150px">
- 	 <? }elseif ($id_tabla==2){ 
+ 				<input type=submit name="leptospirosis" value="Leptospirosis" onclick="<?=$onclick_ir;?>" title="Ficha de Leptospirosis" style="width=150px">
+		
+		<? }elseif ($id_tabla==2){ 
 				$ref = encode_link("brucelosis.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="leptospirosis" value="Leptospirosis" onclick'<?=$onclick_ir;?>' title="Ficha de Leptospirosis" style="width=150px">
- 	 <? }elseif ($id_tabla==3){ 
+ 				<input type=button name="Brucelosis" value="Brucelosis" onclick="<?=$onclick_ir;?>" title="Ficha de Brucelosis" style="width=150px">
+		
+		<? }elseif ($id_tabla==3){ 
 				$ref = encode_link("hidatidosis.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="hidatidosis" value="Hidatidosis" onclick'<?=$onclick_ir;?>' title="Ficha de Hidatidosis" style="width=150px">
- 	 <? }elseif ($id_tabla==4){ 
+ 				<input type=button name="hidatidosis" value="Hidatidosis" onclick="<?=$onclick_ir;?>" title="Ficha de Hidatidosis" style="width=150px">
+		
+		<? }elseif ($id_tabla==4){ 
 				$ref = encode_link("leish_can.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="leish_can" value="Leishmaniasis Visceral Canina" onclick'<?=$onclick_ir;?>' title="Ficha de Leishmaniasis Visceral Canina" style="width=150px">
- 	 <? }?>
+ 				<input type=button name="leish_can" value="Leishmaniasis Visceral Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Leishmaniasis Visceral Canina" style="width=150px">
+		<?}?>
 	    </td>
 	</tr> 
 </table>
