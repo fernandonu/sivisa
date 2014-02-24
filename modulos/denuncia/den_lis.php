@@ -12,14 +12,12 @@ $orden = array(
         "5" => "descripcion"
        );
 $filtro = array(
-		"id_denuncia" => "Denuncia Nº",
-		"n_prof" => "Profecional",
-		"fecha_notif" => "Fecha",
+		"a_prof" => "Apellido del Denunciante",
 		"nom_veterinaria" => "Veterinaria",
-		"descripcion"=> "Tipo"
+		"descripcion"=> "Tipo Enfermedad"
 		);
         
-$sql_tmp="SELECT DISTINCT *
+$sql_tmp="SELECT *
 			FROM
 			epi.denuncia
 			INNER JOIN epi.veterinarias ON epi.denuncia.id_veterinaria = epi.veterinarias.id_veterinaria
@@ -55,7 +53,7 @@ $result = sql($sql,"No se ejecuto en la consulta principal") or die;?>
 	  </tr>
 	  <tr> 
 	    <td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"1","up"=>$up))?>' >Denuncia Nº</a></td>      	
-	    <td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"2","up"=>$up))?>' >Profesional</a></td>      	
+	    <td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"2","up"=>$up))?>' >Denunciante</a></td>      	
 	    <td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"3","up"=>$up))?>' >Fecha</a></td>
 	   	<td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"4","up"=>$up))?>' >Veterinaria</a></td>
 	    <td align=right id=mo><a id=mo href='<?=encode_link("den_lis.php",array("sort"=>"5","up"=>$up))?>' >Tipo</a></td>
@@ -70,7 +68,7 @@ $result = sql($sql,"No se ejecuto en la consulta principal") or die;?>
     
   
      <td onclick="<?=$onclick_elegir?>"><?=$result->fields['id_denuncia']?></td>
-     <td onclick="<?=$onclick_elegir?>"><?=$result->fields['n_prof'].$result->fields['a_prof']?></td>    
+     <td onclick="<?=$onclick_elegir?>"><?=$result->fields['n_prof'].', '.$result->fields['a_prof']?></td>    
      <td onclick="<?=$onclick_elegir?>"><?=fecha($result->fields['fecha_notif'])?></td> 
      <td onclick="<?=$onclick_elegir?>"><?=$result->fields['nom_veterinaria']?></td> 
      <td onclick="<?=$onclick_elegir?>"><?=$result->fields['descripcion']?></td> 

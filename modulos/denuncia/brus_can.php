@@ -4,41 +4,16 @@ extract($_POST,EXTR_SKIP);
 if ($parametros) extract($parametros,EXTR_OVERWRITE);
 cargar_calendario();
 
-if ($_POST['guardar_editar']=='Guardar'){
-	$db->StartTrans();
-  	if ($fecha_notif!='')$fecha_notif=Fecha_db($fecha_notif);else $fecha_notif='1000-01-01';
-			 			   	
-			   $query="update epi.brucel_can set 
-						n_prop='$n_prop',
-						a_prop='$a_prop',
-						dom_prop='$dom_prop',
-						telef='$telef',
-						d_animal='$d_animal',
-						d_epidemio='$d_epidemio',
-						laboratorios=$laboratorios,
-						f_carga=now(),
-						usuario='$usuario'
-					where id_bruc_can=$id_bruc_can";	
-			
-			   
-			    sql($query, "Error actualizar registro") or fin_pagina();
-			    $accion="Los datos se actualizaron";  
-    $db->CompleteTrans();    
-  
-}
-
 if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
 	$usuario=$_ses_user['name'];
-	
-		if ($fecha_notif!='')$fecha_notif=Fecha_db($fecha_notif);else $fecha_notif='1000-01-01';
-	    	$n_prop=strtoupper($n_prop);     
-		   	$a_prop=strtoupper($a_prop);
-		   	$dom_prop=strtoupper($dom_prop);
+	$n_prop=strtoupper($n_prop);     
+	$a_prop=strtoupper($a_prop);
+	$dom_prop=strtoupper($dom_prop);
 		$query="insert into epi.brucel_can
 			   	(id_bruc_can, id_denuncia, n_prop, a_prop, dom_prop, telef, d_animal, d_epidemio,laboratorios, f_carga, usuario)
 			   	values
-			    (nextval('epi.brucel_can_id_bruc_can_seq'), '$id_denuncia=$res_bruc->fields['ape_pac'];$n_prop', '$a_prop', '$dom_prop', '$telef', '$d_animal', '$d_epidemio', '$laboratorios', now(), '$usuario')";
+			    (nextval('epi.brucel_can_id_bruc_can_seq'), '$id_denuncia','$n_prop', '$a_prop', '$dom_prop', '$telef', '$d_animal', '$d_epidemio', '$laboratorios', now(), '$usuario')";
 				
 			   sql($query, "Error al insertar t5") or fin_pagina();
 			 	 
@@ -50,17 +25,21 @@ if ($_POST['guardar']=='Guardar'){
 
 if ($_POST['borrar']=='Borrar'){
 
-	$query="delete from brucel_can 
-			where id_bruc_can=$id_bruc_can";
+	$query="delete from epi.brucel_can
+			where id_bruc_can='$id_bruc_can'";
 	
 	sql($query, "Error al eliminar el registro") or fin_pagina(); 
 	
 	$accion="Los datos se han borrado";
 }
 
+
+$sql_den="select id_bruc_can from epi.brucel_can where id_denuncia=$id_denuncia";
+$res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
+if ($res_den->recordcount()>0) $id_bruc_can=$res_den->fields['id_bruc_can'];
+
 if ($id_bruc_can){
-			$query="SELECT * FROM epi.denuncia
-					INNER JOIN epi.brucel_can ON epi.denuncia.id_denuncia = epi.brucel_can.id_denuncia";
+			$query="SELECT * FROM epi.brucel_can where id_denuncia=$id_denuncia";
 			
 			$res_q12 =sql($query, "Error consulta t5") or fin_pagina();
 			if($res_q12->RecordCount()!=0){
@@ -146,7 +125,7 @@ function control_nuevos(){
      <tr><td><table>
 	         <tr>	           
 	           <td align="right" colspan="2">
-	            <b> Número del Dato: <font size="+1" color="Red"><?=($id_denuncia)? $id_denuncia: "Nuevo Dato";?></font> </b>
+	            <b> Número de Denuncia: <font size="+1" color="Red"><?=($id_denuncia)? $id_denuncia: "Nuevo Dato";?></font> </b>
 	           </td>
 	         </tr>
     </table></td></tr>	     
@@ -163,13 +142,13 @@ function control_nuevos(){
          	  <b>Nombre:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="50" value="<?=$n_prop;?>" name="n_prop" <? if ($id_bruc_can) echo "disabled"?>>
+              <input type="text" size="50" value="<?=$n_prop;?>" name="n_prop" >
             </td>
             <td align="left">
          	  <b>Apellido:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="50" value="<?=$a_prop;?>" name="a_prop" <? if ($id_bruc_can) echo "disabled"?>>
+              <input type="text" size="50" value="<?=$a_prop;?>" name="a_prop" >
             </td>
           </tr>  
 	   </table></div></td></tr>
@@ -179,13 +158,13 @@ function control_nuevos(){
          	  <b>Domicilio:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="75" value="<?=$dom_prop;?>" name="dom_prop" <? if ($id_bruc_can) echo "disabled"?>>
+              <input type="text" size="75" value="<?=$dom_prop;?>" name="dom_prop" >
             </td>
             <td align="left">
          	  <b>Telefono:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="20" value="<?=$telef;?>" name="telef" <? if ($id_bruc_can) echo "disabled"?>>
+              <input type="text" size="20" value="<?=$telef;?>" name="telef" >
             </td>
 		 </tr>
 	</table></div></td></tr>	    
@@ -196,7 +175,7 @@ function control_nuevos(){
 				<b>Datos del Animal:</b>
 			</td>         	
 			<td align='left'>
-			      <textarea cols='100' rows='4' name='d_animal'  <? if($id_bruc_can) echo "disabled"?>><?=$d_animal;?></textarea>
+			      <textarea cols='100' rows='4' name='d_animal'  ><?=$d_animal;?></textarea>
 			</td>
 		</tr>
 		</table></div></td></tr>	    
@@ -207,7 +186,7 @@ function control_nuevos(){
          	  <b>Detalle Epidemiologico:</b>
          	</td>         	
             <td align='left'>
-			      <textarea cols='100' rows='4' name='d_epidemio'  <? if($id_bruc_can) echo "disabled"?>><?=$d_epidemio;?></textarea>
+			      <textarea cols='100' rows='4' name='d_epidemio'  ><?=$d_epidemio;?></textarea>
             </td>
 		 </tr>
 		 </table></div></td></tr>	    
@@ -218,39 +197,37 @@ function control_nuevos(){
          	  <b>Examenes de laboratorio:</b>
          	</td>         	
             <td align='left'>
-			      <textarea cols='100' rows='4' name='laboratorios'  <? if($id_bruc_can) echo "disabled"?>><?=$laboratorios;?></textarea>
+			      <textarea cols='100' rows='4' name='laboratorios'  ><?=$laboratorios;?></textarea>
             </td>
 		 </tr>
 	</table></div></td></tr>	
-	</table></td></tr>
          
 <br>
 <?if ($id_bruc_can){?>
-<table class="bordes" align="center" width="100%">
+		 <table border="1" align="center" width="100%">   
 		 <tr>
 		    <td align="center">
-		      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		      <input type="submit" name="borrar" value="Borrar" style="width=130px" onclick="return confirm('Esta seguro que desea eliminar')" >
 		    </td>
 		 </tr> 
-	 </table>	
-	
+		 </table> 	
 	 <?}
 	 else {?>
-	 	<tr>
+			<table border="1" align="center" width="100%">   
+	 	    <tr>
 		    <td align="center">
 		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		    </td>
+			</table> 
 	 
 	 <? } ?>
-	   
- <tr><td><table width=100% align="center" class="bordes">
+  <table border="1" align="center" width="100%">   
   <tr align="center">
    <td>
-     <input type=button name="volver" value="Volver" onclick="document.location='den_ad.php'"title="Volver al Listado" style="width=150px">     
+     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=150px">     
      </td>
   </tr>
- </table></td></tr>
+  </table> 
  
  </table> 
  
