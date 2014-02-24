@@ -10,9 +10,8 @@ $orden = array(
         "3" => "departamento"
        );
 $filtro = array(
-		"apellido" => "Razon Social",
-		"nombre" => "localidad",
-		"matricula" => "departamento"
+		"localidad" => "Localidad",
+		"nom_veterinaria" => "Nombre Veterinaria",
 		);
         
 $sql_tmp="SELECT DISTINCT *
