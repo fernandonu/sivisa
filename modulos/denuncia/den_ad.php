@@ -33,11 +33,7 @@ if ($_POST['guardar_editar']=='Guardar'){
   $db->CompleteTrans();    
 }
 
-if ($_POST['guardar']=='Guardar'){
-	
-	if ($id_denuncia) {
-	   $accion="Los datos se han guardado correctamente IF "; 
-	}else{
+if ($_POST['guardar']=='Guardar'){	
 		if ($fecha_notif!='')$fecha_notif=Fecha_db($fecha_notif);else $fecha_notif='1000-01-01';
 		$db->StartTrans();
 	    $n_prof=strtoupper($n_prof);     
@@ -45,17 +41,20 @@ if ($_POST['guardar']=='Guardar'){
 	    $matricula=strtoupper($matricula);
 		$usuario=$_ses_user['name'];
 	    
+		$q="select nextval('epi.denuncia_id_denuncia_seq') as id_denuncia";
+	    $id_denuncia=sql($q) or fin_pagina();
+	    $id_denuncia=$id_denuncia->fields['id_denuncia'];
+		
 		$query="insert into epi.denuncia
 			   	(id_denuncia, n_prof, a_prof, matricula, dni_prof, fecha_notif, id_veterinaria, id_tabla, f_carga, usuario)
 			   	values
-			    (nextval('epi.denuncia_id_denuncia_seq'), '$n_prof', '$a_prof', '$matricula', '$dni_prof', '$fecha_notif', '$id_veterinaria', '$id_tabla', now(), '$usuario')";
+			    ($id_denuncia, '$n_prof', '$a_prof', '$matricula', '$dni_prof', '$fecha_notif', '$id_veterinaria', '$id_tabla', now(), '$usuario')";
 				
 			   sql($query, "Error al insertar la Veterinaria") or fin_pagina();
 			 	 
 			   $accion="Los datos se han guardado correctamente"; 
 	    
-	     $db->CompleteTrans();     
-	}
+	     $db->CompleteTrans();
 }
 
 if ($id_denuncia) {
@@ -310,48 +309,34 @@ function buscar_combo(obj)
 			      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
 		   <?}else {?>
-			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="height:50px; width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		 <? } ?>
 	    </td>
 	</tr> 
 </table>
-	
+
+<?if ($id_denuncia) {
+	$query10="SELECT DISTINCT * FROM epi.ficha_epi where id_tabla='$id_tabla'";
+	$res_10=sql($query10,"Error en consulta Nº 2");
+	$descripcion=$res_10->fields['descripcion'];
+	$pagina=$res_10->fields['n_t'];
+?>
 <table border="1" align="center" width="100%">
 	<tr>
 	   <td align="center">
-   		<? if($id_tabla==5){ 
-				$ref = encode_link("brus_can.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla, "pagina"=>"den_ad"));		   		
+	   
+				<?$ref = encode_link("$pagina",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla, "pagina"=>"den_ad"));		   		
     			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="Bruc_can" value="Brucelosis Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Brucelosis Canina" style="width=150px"> 
-		 
-		 <? }elseif ($id_tabla==1){ 
-				$ref = encode_link("leptos.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla, "pagina"=>"den_ad"));		   		
-    			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="leptospirosis" value="Leptospirosis" onclick="<?=$onclick_ir;?>" title="Ficha de Leptospirosis" style="width=150px">
-		
-		<? }elseif ($id_tabla==2){ 
-				$ref = encode_link("brucelosis.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
-    			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="Brucelosis" value="Brucelosis" onclick="<?=$onclick_ir;?>" title="Ficha de Brucelosis" style="width=150px">
-		
-		<? }elseif ($id_tabla==3){ 
-				$ref = encode_link("hidatidosis.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
-    			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="hidatidosis" value="Hidatidosis" onclick="<?=$onclick_ir;?>" title="Ficha de Hidatidosis" style="width=150px">
-		
-		<? }elseif ($id_tabla==4){ 
-				$ref = encode_link("leish_can.php",array("id_denuncia"=>$id_denuncia, "id_tabla"=>$id_tabla ,"pagina"=>"den_ad"));		   		
-    			$onclick_ir="location.href='$ref'";?>
- 				<input type=button name="leish_can" value="Leishmaniasis Visceral Canina" onclick="<?=$onclick_ir;?>" title="Ficha de Leishmaniasis Visceral Canina" style="width=350px">
-		<?}?>
+ 				<input type=button name="<?= str_replace(' ','',$descripcion);?>" value="<?=$descripcion?>" onclick="<?=$onclick_ir;?>" title="Ficha de <?=$descripcion?>" style="height:50px; width=250px"> 
 	    </td>
 	</tr> 
 </table>
+<?}?>
 
 <table border="1" align="center" width="100%">
 	<tr>
 	   <td align="center">
-		     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=150px">     
+		     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=250px">     
 		     </td>
 	</tr> 
 </table>	

@@ -5,6 +5,7 @@ variables_form_busqueda("den_lis");
 
 $orden = array(
         "default" => "1",
+		"default_up" => "0",
         "1" => "id_denuncia",
         "2" => "n_prof",
         "3" => "fecha_notif",

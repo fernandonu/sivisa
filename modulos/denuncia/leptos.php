@@ -147,10 +147,11 @@ function control_nuevos(){
       <tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> DATOS DEL PACIENTE </b>
+	            <b> DATOS DEL PROFESIONAL ACTUANTE </b>
 	           </td>
 	         </tr>
     	</table></td></tr> 
+   
    <tr><td colspan=9><div ><table width=95% align="left" >
           <tr>
          	<td align="left">
@@ -163,334 +164,175 @@ function control_nuevos(){
             </td>
           </tr>  
 	 </table></div></td></tr>
-	 <tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
-         <td align="right">
-         	  <b> Fecha de Nacimiento:</b>
-             <input type='text' name='f_nacimiento' value='<?=$f_nacimiento;?>' size='40' align='right' ></b>
-           </td>
-           
-            <td align="left">
-         	  <b>Sexo (M/F):</b>
-      					<input type="text" size="4" value="<?=$sexo;?>" name="sexo" >
-			</td>
-           
-		 </tr>
-	</table></div></td></tr>	    
-	  <tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
+
+	<tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
          	<td align="left">
-         	  <b>Domicilio:</b>
-         	
-              <input type="text" size="75" value="<?=$domicilio;?>" name="domicilio" >
+         	  <b>Matricula:</b>
+              <input type="text" size="50" value="<?=$f_nacimiento;?>" name="f_nacimiento" >
             </td>
             <td align="left">
          	  <b>Localidad:</b>
-         	
-              <input type="text" size="20" value="<?=$localidad;?>" name="localidad" >
+              <input type="text" size="50" value="<?=$localidad;?>" name="localidad" >
             </td>
-		 </tr>
+          </tr>  
+	 </table></div></td></tr>
+	 
+  <tr><td colspan=9><div ><table width=95% align="left" >        
 		 <tr>
 		 	<td align="left">
-				<b>Departamento:</b>
-         	
-              <input type="text" size="20" value="<?=$departamento;?>" name="departamento" >
+			  <b>Departamento:</b>         	
+              <input type="text" size="50" value="<?=$departamento;?>" name="departamento" >
+            </td>
+			<td align="left">
+         	  <b>Provincia:</b>
+              <input type="text" size="50" value="<?=$sexo;?>" name="sexo" >
             </td>
 		 </tr>
-	</table></div></td></tr>	    
-   <tr><td colspan=9><div ><table width=100% align="left" >
+	</table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b>OCUPACION </b>
-	           </td>
-	         </tr>
-    	</table></td></tr> 
-	<tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
-               	<td align="left">
-					<b>Tareas Rurales (SI/NO):</b>
-					<input type="text" size="4" value="<?=$trurales;?>" name="trurales">
-	            </td>
-            	<td align="left">
-					<b>Empleado en Frigorifico (SI/NO):</b>				
-					<input type="text" size="4" value="<?=$e_frogorifico;?>" name="e_frogorifico">
-				</td> 
-				
-				<td align='left'>
-					<b>Desempleado (SI/NO):</b>
-					<input type="text" size="4" value="<?=$desempleado;?>" name="desempleado">
-	            </td>
-		</tr>
-	</table></div></td></tr>	    
-   
-	<tr><td colspan=9><div ><table width=95% align="left" >     
-		<tr>
-			<td align="left">
-				<b>Obrero:</b>
-				<input type="text" size="70" value="<?=$obrero;?>" name="obrero" >
-            </td>
-            <td align="left">
-				<b>Otros:</b>
-				<input type="text" size="70" value="<?=$otro;?>" name="otro" >
-			</td>         	
-		</tr>
-	</table></div></td></tr>	    
-   <tr><td colspan=9><div ><table width=100% align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>Datos de la Enfermedad </b>
+	            <b>DATOS DEL PROPIETARIO </b>
 	           </td>
 	         </tr>
     </table></td></tr> 
-	<tr><td colspan=9><div ><table width=95% align="left" >   
-		<tr>
-
-			 <td align="right">
-				<b>Fecha de primeros sintomas:</b>
-			</td> 
-			<td align="left">
-				<input type='text' id='f_psintoma' name='f_psintoma'  value='<?=$f_psintoma; ?>' size=10 >				    	 
-			</td>	
-			<td> 
-			<td align="right">
-				<b>Fecha de Internacion:</b>
-			</td> 
-			<td align="left">
-				<input type='text' id='f_internacion' name='f_internacion'  value='<?=$f_internacion; ?>' size=10 >				    	 
-			</td>	
-			<td align="right">
-				<b>Fecha de toma de Muestra:</b>
-			</td>    
-			<td align="left">
-				<input type='text' id='f_muestra' name='f_muestra' value='<?=$f_muestra;?>' size=10 >
-			</td>
-		</tr>											        
-	</table></div></td></tr>	    
-      <tr><td colspan=9><div ><table width=100% align="left" >
+	
+	<tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
+         	<td align="left">
+         	  <b>Nombre:</b>
+              <input type="text" size="50" value="<?=$a_domestico;?>" name="a_domestico" >
+            </td>
+            <td align="left">
+         	  <b>Apellido:</b>
+              <input type="text" size="50" value="<?=$roedores;?>" name="roedores" >
+            </td>
+          </tr>  
+	 </table></div></td></tr>
+	 
+	 <tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
+         	<td align="left">
+         	  <b>Domicilio:</b>
+              <input type="text" size="50" value="<?=$rio_arroyo;?>" name="rio_arroyo" >
+            </td>
+            <td align="left">
+         	  <b>Telefono:</b>
+              <input type="text" size="50" value="<?=$laguna;?>" name="laguna" >
+            </td>
+          </tr>  
+	 </table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b>Sintomas </b>
+	            <b>DATOS DEL ANIMAL </b>
 	           </td>
 	         </tr>
-    </table></td></tr>
-    <tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
-               	<td align="right">	 
-					<b>ICTERICIA:</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="ictericia" value="S" <?=($ictericia=='S')?'checked':'';?> >Si
-							<input type="radio" name="ictericia" value="N" <?=($ictericia=='N')?'checked':'';?> >No
-	            </td>
-            	<td align="right">
-					<b>Ataques repentinos de cefaleas:</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="cefalea" value="S"  <?=($cefalea=='S')?'checked':'';?> >Si
-							<input type="radio" name="cefalea" value="N"  <?=($cefalea=='N')?'checked':'';?> >No
-				</td>
-				<td align="right">
-					<b>Sindrome Meningeo:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="s_mengeo" value="S" <?=($s_mengeo=='S')?'checked':'';?> >Si
-							<input type="radio" name="s_mengeo" value="N" <?=($s_mengeo=='N')?'checked':'';?> >No
-	            </td>
-	    </tr> 
-	    <tr>
-            	<td align="right">
-					<b>Inyeccion Conjuntival Bilateral:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="iconjuntivalbilat" value="S" <?=($iconjuntivalbilat=='S')?'checked':'';?> >Si
-							<input type="radio" name="iconjuntivalbilat" value="N" <?=($iconjuntivalbilat=='N')?'checked':'';?> >No
-				</td> 
-				<td align="right">
-					<b>Fiebre 39ºC o +:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="fiebre" value="S" <?=($fiebre=='S')?'checked':'';?> >Si
-							<input type="radio" name="fiebre" value="N" <?=($fiebre=='N')?'checked':'';?> >No
-				</td> 
-				<td align="right">
-					<b>Mialgias(En pantorrillas):</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="mialgias" value="S" <?=($mialgias=='S')?'checked':'';?> >Si
-							<input type="radio" name="mialgias" value="N" <?=($mialgias=='N')?'checked':'';?> >No
-				</td> 
-		</tr>
-		
-	</table></div></td></tr>	 
+    </table></td></tr> 
 	
-	
-	
-	<tr><td colspan=9><div ><table width=100% align="left" >   
-		<tr id="ma">         
-	           <td align="center" colspan="2">
-         	  <b>Datos de Laboratorio Clinico:</b>
-         	</td>         	
-           
-		 </tr>
-	</table></div></td></tr>	
-<tr><td colspan=9><div ><table width=95% align="left" >     
+	<tr><td colspan=9><div ><table width=95% align="left" >     
 		<tr>
 			<td align="right">
-				<b>ERS 1ºHora:</b>
+				<b>Raza:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$ers1hs;?>" name="ers1hs" >
             </td>
             <td align="right">
-				<b>Leucositosis:</b>
+				<b>Sexo:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$leucositosis;?>" name="leucositosis" >
 			</td> 
+		</tr>
+		<tr>
 			 <td align="right">
-				<b>Neutrofilia:</b>
+				<b>Edad:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$neutrofilia;?>" name="neutrofilia" >
-			</td>         	
-		</tr>
-		<tr>
+			</td>	
 			<td align="right">
-				<b>Uremia:</b>
+				<b>Color del Manto:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$uremia;?>" name="uremia" >
             </td>
+		<tr>
+		</tr>
             <td align="right">
-				<b>Bilirubina Directa:</b>
+				<b>Nombre:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$bili_direc;?>" name="bili_direc" >
 			</td> 
 			 <td align="right">
-				<b>T.G.P.:</b>
+				<b>Procedencia:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$tgp;?>" name="tgp" >
 			</td>
+		</tr>
+		<tr>
 			<td align="right">
-				<b>C.P.K.:</b>
+				<b>Fecha Inicio de Sintomas:</b>
 				</td>  
 				<td align="left">
 				<input type="text" size="25" value="<?=$cpk;?>" name="cpk" >
-			</td>         	
+			</td>   
+			<td align="right" >
+				<b>Sintomas:</b>
+				</td>  
+				<td align="left"colspan="4">
+				<textarea cols='50' rows='5' name='otro'><?=$otro;?></textarea>
+			</td>  			
 		</tr>
-	</table></div></td></tr>	
-	  <tr><td colspan=9><div ><table width=100% align="left" >
+	</table></div></td></tr>
+	
+	
+   	    
+   <tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b>FUENTE PROBABLE DE INFECCION </b>
+	            <b>Enfermedad </b>
 	           </td>
 	         </tr>
-    </table></td></tr>
-    <tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
-               	<td align="right">	 
-					<b>Contacto con animales domesticos:</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="a_domestico" value="S" <?=($a_domestico=='S')?'checked':'';?> >Si
-							<input type="radio" name="a_domestico" value="N" <?=($a_domestico=='N')?'checked':'';?> >No
-	            </td>
-            	<td align="right">
-					<b>Roedores u otros:</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="roedores" value="S" <?=($roedores=='S')?'checked':'';?> >Si
-							<input type="radio" name="roedores" value="N" <?=($roedores=='N')?'checked':'';?> >No
-				</td>
-				<td align="right">
-					<b>Rio-Arroyo:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="rio_arroyo" value="S" <?=($rio_arroyo=='S')?'checked':'';?> >Si
-							<input type="radio" name="rio_arroyo" value="N" <?=($rio_arroyo=='N')?'checked':'';?> >No
-	            </td>
-	    </tr> 
-	    <tr>
-            	<td align="right">
-					<b>Laguna:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="laguna" value="S" <?=($laguna=='S')?'checked':'';?> >Si
-							<input type="radio" name="laguna" value="N" <?=($laguna=='N')?'checked':'';?> >No
-				</td> 
-				<td align="right">
-					<b>Alcantarilla:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="alcantarilla" value="S" <?=($alcantarilla=='S')?'checked':'';?> >Si
-							<input type="radio" name="alcantarilla" value="N" <?=($alcantarilla=='N')?'checked':'';?> >No
-				</td> 
-				<td align="right">
-					<b>Inundacion:</b>
-					</td>  
-				<td align="left">
-							<input type="radio" name="inundacion" value="S" <?=($inundacion=='S')?'checked':'';?> >Si
-							<input type="radio" name="inundacion" value="N" <?=($inundacion=='N')?'checked':'';?> >No
-				</td> 
-		</tr>
-		
-	</table></div></td></tr>	
-		  <tr><td colspan=9><div ><table width=100% align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>Laboratorio </b>
-	           </td>
-	         </tr>
-    </table></td></tr>
-    <tr><td colspan=9><div ><table width=95% align="left" >     
-        <tr>
-               	<td align="right">	 
-					<b>Serologia</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="serologia" value="S" <?=($serologia=='S')?'checked':'';?> >Si
-							<input type="radio" name="serologia" value="N" <?=($serologia=='N')?'checked':'';?> >No
-	            </td>
-            	<td align="right">
-					<b>Positividad:</b>
-				</td>  
-				<td align="left">
-							<input type="radio" name="positividad" value="S" <?=($positividad=='S')?'checked':'';?> >Si
-							<input type="radio" name="positividad" value="N" <?=($positividad=='N')?'checked':'';?> >No
-				</td>
-		</tr> 
-	</table></td></tr>
-    <tr><td colspan=9><div ><table width=95% align="left" >     	
+    </table></td></tr> 
+	<tr><td colspan=9><div ><table width=95% align="left" >   
 		<tr>
 			<td align="right">
-				<b>Titulo:</b>
+				<b>Datos Epidemiologico:</b>
 				</td>  
 				<td align="left">
-					<textarea cols='60' rows='2' name='titulo'><?=$titulo;?></textarea>
+				<textarea cols='60' rows='3' name='semana_epi'><?=$semana_epi;?></textarea>
 			</td>
-				<td align="right">
-					<b>aislamiento:</b>
-					</td>  
+			<td align="right">
+				<b>Examenes de Laboratorio:</b>
+				</td>  
 				<td align="left">
-							<input type="radio" name="rio_arroyo" value="S" <?=($rio_arroyo=='S')?'checked':'';?> >Si
-							<input type="radio" name="rio_arroyo" value="N" <?=($rio_arroyo=='N')?'checked':'';?> >No
-	            </td>
-	    </tr> 
-	   </table></td></tr>
-    <tr><td colspan=9><div ><table width=95% align="left" >     
-		
-	    <td align="right">
+				<textarea cols='60' rows='3' name='titulo'><?=$titulo;?></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<b>Accion en Comunidad o Ambiente:</b>
+				</td>  
+				<td align="left">
+				<textarea cols='60' rows='3' name='obrero'><?=$obrero;?></textarea>
+			</td>
+			<td align="right">
 				<b>Observaciones:</b>
-		</td>         	
-		<td align='left'>
-				<textarea cols='75' rows='4' name='obs'><?=$obs;?></textarea>
-		</td>	     	
-	    
-	    
-	</table></div></td></tr>	  
- </table>           
+				</td>         	
+				<td align='left'>
+				<textarea cols='60' rows='4' name='obs'><?=$obs;?></textarea>
+				</td>
+			</tr>  		
+	</table></div></td></tr>
+
+</table>           
 <br>
 
 <?if ($id_leptosp){?>
@@ -508,7 +350,7 @@ function control_nuevos(){
 	 	 <table width=100% align="center" class="bordes">
 		<tr>
 		    <td align="center">
-		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+		      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="height:50px; width=250px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		    </td>
 		</table>	
 
@@ -518,7 +360,7 @@ function control_nuevos(){
  <tr><td><table width=100% align="center" class="bordes">
   <tr align="center">
    <td>
-     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=150px">     
+     <input type=button name="volver" value="Volver" onclick="document.location='den_lis.php'"title="Volver al Listado" style="width=200px">     
      </td>
   </tr>
  </table></td></tr>
