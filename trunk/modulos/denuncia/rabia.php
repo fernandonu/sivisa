@@ -8,12 +8,12 @@ if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
 	$usuario=$_ses_user['name'];
 	
-		$query="insert into epi.lvcan
-				(id_lvc,id_denuncia,usuario,fcarga,raza,sexo,color_m,edad,nombre,procedencia,prov_nac,callejero,int_casa,gallinero,
+		$query="insert into epi.rabia
+				(id_rabia,id_denuncia,usuario,fcarga,raza,sexo,color_m,edad,nombre,procedencia,prov_nac,callejero,int_casa,gallinero,
 				m_perros,cant,problema,lab_fecha,sangre,suero,ganglio,piel,otro,parasitologico,paras_res,serologico,serol_res,molecular,mol_res,
 				nom_prop,ape_prop,dni_prop,dom_prop,nro_prop,tel,loca_prop,dep_prop,prop_tenedor, t_prov, traslado,sig_cli,oligosint,polisint, d_aire)
 				values
-				(nextval('epi.lvcan_id_lvc_seq'),'$id_denuncia','$usuario', now(),'$raza','$sexo','$color_m','$edad','$nombre','$procedencia','$prov_nac',
+				(nextval('epi.rabia_id_rabia_seq'),'$id_denuncia','$usuario', now(),'$raza','$sexo','$color_m','$edad','$nombre','$procedencia','$prov_nac',
 				'$callejero','$int_casa','$gallinero',
 				'$m_perros','$cant','$problema','$lab_fecha','$sangre','$suero','$ganglio','$piel','$otro','$parasitologico','$paras_res','$serologico','$serol_res','$molecular','$mol_res',
 				'$nom_prop','$ape_prop','$dni_prop','$dom_prop','$nro_prop','$tel','$loca_prop','$dep_prop','$prop_tenedor', '$t_prov','$traslado','$sig_cli','$oligosint','$polisint','$d_aire' )";
@@ -24,22 +24,22 @@ if ($_POST['guardar']=='Guardar'){
 
 if ($_POST['borrar']=='Borrar'){
 
-	$query="delete from epi.lvcan
-			where id_lvc=$id_lvc";
+	$query="delete from epi.rabia
+			where id_rabia=$id_rabia";
 	
 	sql($query, "Error al eliminar el registro") or fin_pagina(); 
 	
 	$accion="Los datos se han borrado";
 }
-$sql_den="select id_lvc from epi.lvcan where id_denuncia=$id_denuncia";
+$sql_den="select id_rabia from epi.rabia where id_denuncia=$id_denuncia";
 $res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
-if ($res_den->recordcount()>0) $id_lvc=$res_den->fields['id_lvc'];
+if ($res_den->recordcount()>0) $id_rabia=$res_den->fields['id_rabia'];
 
-if ($id_lvc) {
-			$q_lvc="select * from epi.lvcan where id_denuncia=$id_denuncia";
+if ($id_rabia) {
+			$q_lvc="select * from epi.rabia where id_denuncia=$id_denuncia";
 			$res_lvc=sql($q_lvc, "Error consulta t2") or fin_pagina();
 			if($res_lvc->RecordCount()!=0){
-					$id_lvc=$res_lvc->fields['id_lvc'];
+					$id_rabia=$res_lvc->fields['id_rabia'];
 					$raza=$res_lvc->fields['raza'];
 					$sexo=$res_lvc->fields['sexo'];
 					$color_m=$res_lvc->fields['color_m'];
@@ -107,15 +107,15 @@ function control_nuevos(){
 
 </script>
 
-<form name='form1' action='leish_can.php' method='POST'>
-<input type="hidden" value="<?=$id_lvc?>" name="id_lvc">
+<form name='form1' action='rabia.php' method='POST'>
+<input type="hidden" value="<?=$id_rabia?>" name="id_rabia">
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="95%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
  <tr id="mo">
     <td>
     	<?
-    	if (!$id_lvc) {
+    	if (!$id_rabia) {
     	?>  
     	<font size=+1><b>Nuevo Dato</b></font>   
     	<? }
@@ -456,7 +456,7 @@ function control_nuevos(){
 	 </table></td></tr> 		
  </table>           
 <br>
-<?if ($id_lvc){?>
+<?if ($id_rabia){?>
 <table class="bordes" align="center" width="100%">
 		 <tr>
 		    <td align="center">
