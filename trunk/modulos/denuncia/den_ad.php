@@ -309,7 +309,7 @@ function buscar_combo(obj)
 			      <input type="submit" name="guardar_editar" value="Guardar" title="Guardar" disabled style="width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
 			      <input type="button" name="cancelar_editar" value="Cancelar" title="Cancela Edicion" disabled style="width=130px" onclick="document.location.reload()">		      
 		   <?}else {?>
-			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="height:50px; width=130px" onclick="return control_nuevos()">&nbsp;&nbsp;
+			      <input type="submit" name="guardar" value="Guardar" title="Guardar" style="height:50px; width=250px" onclick="return control_nuevos()">&nbsp;&nbsp;
 		 <? } ?>
 	    </td>
 	</tr> 
