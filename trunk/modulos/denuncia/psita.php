@@ -9,12 +9,12 @@ cargar_calendario();
 if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
 	$usuario=$_ses_user['name'];				
-		$query="insert into epi.hidatidosis
-					(id_hidat,id_denuncia,ape_pac,nom_pac,f_nacimiento,sexo,domicilio,localidad,departamento,rural,domestica,profesional,otros,mn_unoh,mn_unom,
+		$query="insert into epi.psitacosis
+					(id_psita,id_denuncia,ape_pac,nom_pac,f_nacimiento,sexo,domicilio,localidad,departamento,rural,domestica,profesional,otros,mn_unoh,mn_unom,
 					mna_qh,mna_qm,my_qh,my_qm,cant_perros,p_comen,ovino,bovino,pocino,equino,f_sintoma,descrip,tmedico,tquirurgico,
 					dd5,contraief,inmunoef,ecografia,tac,f_notificacion,medidas,obs,dni_prof,edad)
 					Values
-					(nextval('epi.hidatidosis_id_hidat_seq'),'$id_denuncia',
+					(nextval('epi.psitacosis_id_psita_seq'),'$id_denuncia',
 					'$ape_pac','$nom_pac','$f_nacimiento','$sexo','$domicilio','$localidad','$departamento','$rural','$domestica','$profesional','$otros','$mn_unoh','$mn_unom',
 					'$mna_qh','$mna_qm','$my_qh','$my_qm','$cant_perros','$p_comen','$ovino','$bovino','$pocino','$equino','$f_sintoma','$descrip','$tmedico','$tquirurgico',
 					'$dd5','$contraief','$inmunoef','$ecografia','$tac','$f_notificacion','$medidas','$obs','$dni_prof','$edad')";
@@ -26,8 +26,8 @@ if ($_POST['guardar']=='Guardar'){
 
 if ($_POST['borrar']=='Borrar'){
 
-	$query="delete from epi.hidatidosis
-			where id_hidat='$id_hidat'";
+	$query="delete from epi.psitacosis
+			where id_psita='$id_psita'";
 	
 	sql($query, "Error al eliminar el registro") or fin_pagina(); 
 	
@@ -36,11 +36,11 @@ if ($_POST['borrar']=='Borrar'){
 
 $sql_den="select id_psita from epi.psitacosis where id_denuncia=$id_denuncia";
 $res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
-if ($res_den->recordcount()>0) $id_hidat=$res_den->fields['id_hidat'];
+if ($res_den->recordcount()>0) $id_psita=$res_den->fields['id_psita'];
 
-if ($id_hidat) {
+if ($id_psita) {
 			
-		$q_hid="select * from epi.hidatidosis where id_denuncia=$id_denuncia";
+		$q_hid="select * from epi.psitacosis where id_denuncia=$id_denuncia";
 		$res_hid=sql($q_hid, "Error consulta t2") or fin_pagina();
 					$ape_pac=$res_hid->fields['ape_pac'];
 					$nom_pac=$res_hid->fields['nom_pac'];
@@ -100,43 +100,10 @@ function control_nuevos(){
 	 else return false;	
 }//de function control_nuevos()
 
-//funciones para busqueda abreviada utilizando teclas en la lista que muestra los clientes.
-var digitos=10; //cantidad de digitos buscados
-var puntero=0;
-var buffer=new Array(digitos); //declaración del array Buffer
-var cadena="";
-
-function buscar_combo(obj)
-{
-   var letra = String.fromCharCode(event.keyCode)
-   if(puntero >= digitos)
-   {
-       cadena="";
-       puntero=0;
-   }   
-   //sino busco la cadena tipeada dentro del combo...
-   else
-   {
-       buffer[puntero]=letra;
-       //guardo en la posicion puntero la letra tipeada
-       cadena=cadena+buffer[puntero]; //armo una cadena con los datos que van ingresando al array
-       puntero++;
-
-       //barro todas las opciones que contiene el combo y las comparo la cadena...
-       //en el indice cero la opcion no es valida
-       for (var opcombo=1;opcombo < obj.length;opcombo++){
-          if(obj[opcombo].text.substr(0,puntero).toLowerCase()==cadena.toLowerCase()){
-          obj.selectedIndex=opcombo;break;
-          }
-       }
-    }//del else de if (event.keyCode == 13)
-   event.returnValue = false; //invalida la acción de pulsado de tecla para evitar busqueda del primer caracter
-}//de function buscar_op_submit(obj)
-
 </script>
 
-<form name='form1' action='hidatidosis.php' method='POST' enctype='multipart/form-data'>
-<input type="hidden" value="<?=$id_hidat?>" name="id_hidat">
+<form name='form1' action='psita.php' method='POST' enctype='multipart/form-data'>
+<input type="hidden" value="<?=$id_psita?>" name="id_psita">
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="95%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
@@ -158,7 +125,7 @@ function buscar_combo(obj)
  <tr><td><table width=95% align="center" class="bordes">
      <tr>
       <td id=mo colspan="2">
-       <b> Datos del Profesional Denunciante </b>
+       <b> PSITACOSIS </b>
       </td>
      </tr>
      	<tr><td><table>
@@ -167,8 +134,15 @@ function buscar_combo(obj)
 	            <b> Número del Dato: <font size="+1" color="Red"><?=($id_denuncia)? $id_denuncia: "Nuevo Dato";?></font> </b>
 	           </td>
 	         </tr>
-    	</table></td></tr>	     
-   
+    	</table></td></tr>
+		
+   <tr><td colspan=9><div ><table width=100% align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>DATOS DEL PROFESIONAL ACTUANTE </b>
+	           </td>
+	         </tr>
+    </table></td></tr>
    <tr><td colspan=9><div ><table width=100% align="center" >
           <tr>
          	<td align="right">
@@ -184,233 +158,172 @@ function buscar_combo(obj)
               <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
             </td>
 			<td align="right">
-         	  <b>DNI Nº:</b>
+         	  <b>Telefono:</b>
          	</td>         	
             <td align='left'>
-              <input type="text" size="20" value="<?=$dni_prof;?>" name="dni_prof" >
+              <input type="text" size="20" value="<?=$sexo;?>" name="sexo" >
             </td>
           </tr>  
 	</table></div></td></tr> 
-    <tr><td colspan=9><div><table width=100% align="center" >     
-        <tr>
-         	<td align="right">
-         	  <b>Edad:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="20" value="<?=$edad;?>" name="edad" >
-            </td>
-            <td align="right">
-         	  <b>Sexo (M/F):</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="5" value="<?=$sexo;?>" name="sexo" >
-            </td>
-            <td align="right">
-				<b>Fecha de Nacimiento:</b> 
-			</td>         	
-			<td align='left'>
-				<input type=text id=fecha_notif name='f_nacimiento' value='<?=$f_nacimiento;?>' size=15 title="Fecha de Nacimiento">
-			</td>
-		 </tr>
-	</table></div></td></tr>
+    	
+	<tr><td colspan=9><div ><table width=100% align="left" >
+          <tr id="ma">         
+	           <td align="center" colspan="2">
+	            <b>DATOS DEL PROPIETARIO </b>
+	           </td>
+	         </tr>
+    </table></td></tr> 
 	
-    <tr><td colspan=9><div><table width=100% align="center" >     
-        <tr>
+	<tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
          	<td align="left">
-         	  <b>Domicilio:</b>
-         	
-              <input type="text" size="75" value="<?=$domicilio;?>" name="domicilio" >
+         	  <b>Nombre:</b>
+              <input type="text" size="50" value="<?=$f_nacimiento;?>" name="f_nacimiento" >
             </td>
             <td align="left">
+         	  <b>Apellido:</b>
+              <input type="text" size="50" value="<?=$domicilio;?>" name="domicilio" >
+            </td>
+          </tr>  
+	 </table></div></td></tr>
+	 
+	 <tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
+         	<td align="left">
+         	  <b>Domicilio:</b>
+              <input type="text" size="50" value="<?=$localidad;?>" name="localidad" >
+            </td>
+            <td align="left">
+         	  <b>Telefono:</b>
+              <input type="text" size="50" value="<?=$departamento;?>" name="departamento" >
+            </td>
+          </tr>  
+	 </table></div></td></tr>
+	 
+	 <tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
+         	<td align="left">
+         	  <b>Edad:</b>
+              <input type="text" size="50" value="<?=$rural;?>" name="rural" >
+            </td>
+            <td align="left">
+         	  <b>Ocupacion:</b>
+              <input type="text" size="50" value="<?=$domestica;?>" name="domestica" >
+            </td>
+          </tr>  
+	 </table></div></td></tr>
+	 
+	 <tr><td colspan=9><div ><table width=95% align="left" >
+          <tr>
+         	<td align="left">
          	  <b>Localidad:</b>
-         	
-              <input type="text" size="20" value="<?=$localidad;?>" name="localidad" >
+              <input type="text" size="50" value="<?=$profesional;?>" name="profesional" >
             </td>
-		 </tr>
-    </table></div></td></tr>
-
-	<tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>Departamento:</b>
-         	
-              <input type="text" size="20" value="<?=$departamento;?>" name="departamento" >
+            <td align="left">
+         	  <b>Departamento:</b>
+              <input type="text" size="50" value="<?=$otros;?>" name="otros" >
             </td>
-		 <td align="left">
-				<b>Ocupacion (Rural/Domestica/Profesional/Otros) detallar:</b>
-         	
-              <input type="text" size="40" value="<?=$rural;?>" name="rural" >
-            </td>
-		</tr>
-	</table></div></td></tr>
-	
+          </tr>  
+	 </table></div></td></tr>
+	 
 	 <tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b>GRUPO FAMILIAR Y TENECIA DE PERROS</b>
+	            <b>DATOS DE LA FUENTE DE INFECCION</b>
 	           </td>
 	         </tr>
      </table></td></tr>
 	
-	<tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>Cant. Hombres Menores a 1 Año:</b>
-				<input type="text" size="4" value="<?=$mn_unoh;?>" name="mn_unoh" >
-            </td>
-			<td align="left">
-				<b>Cant. Mujeres Menores a 1 Año:</b>
-				<input type="text" size="4" value="<?=$mn_unom;?>" name="mn_unom" >
-            </td>
-			<td align="left">
-				<b>Cant. Hombres de 1 a 15 Años:</b>
-				<input type="text" size="4" value="<?=$mna_qh;?>" name="mna_qh" >
-            </td>
-			<td align="left">
-				<b>Cant. Mujeres de 1 a 15 Años:</b>
-				<input type="text" size="4" value="<?=$mna_qm;?>" name="mna_qm" >
-            </td>
-		</tr>
-	</table></div></td></tr>
-
-	<tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>Cant. Hombres Mayores a 15 Años:</b>
-				<input type="text" size="4" value="<?=$my_qh;?>" name="my_qh" >
-            </td>
-			<td align="left">
-				<b>Cant. Mujeres Mayores a 15 Años:</b>
-				<input type="text" size="4" value="<?=$my_qm;?>" name="my_qm" >
-            </td>
-			<td align="left">
-				<b>Cant. Perros en el establecimiento:</b>
-				<input type="text" size="4" value="<?=$cant_perros;?>" name="cant_perros" >
-            </td>			
-		</tr>
-	</table></div></td></tr>
-
-	<tr><td colspan=9><div><table width=100% align="center" >  
+	<tr><td colspan=9><div ><table width=95% align="left" >     
 		<tr>
-			<td align="left">
-				<b>Estos Perros Comen? (detallar):</b>
-				<input type="text" size="80" value="<?=$p_comen;?>" name="p_comen" >
+			<td align="right">
+				<b>Tipo de Aves:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$mn_unoh;?>" name="mn_unoh" >
             </td>
-		</tr>		
-	</table></div></td></tr>
-	
-	<tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>POBLACION ANIMAL</b>
-	           </td>
-	         </tr>
-     </table></td></tr>
-	 
-	<tr><td colspan=9><div><table width=100% align="center" >  
-	 	<tr>
-			<td align="left">
-				<b>Si es un establecimiento RURAL detallar tipos de animales:</b>
-				<input type="text" size="130" value="<?=$ovino;?>" name="ovino" >
+            <td align="right">
+				<b>Tiempo de Tenencia:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$mn_unom;?>" name="mn_unom" >
+			</td> 
+		</tr>
+		<tr>
+			 <td align="right">
+				<b>Lugar de Compra (Ambulante/Forrajera/Pajareria):</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$mna_qh;?>" name="mna_qh" >
+			</td>	
+			<td align="right">
+				<b>Otro (Especificar):</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$mna_qm;?>" name="mna_qm" >
             </td>
-		</tr>		
-	</table></div></td></tr>
+		<tr>
+		</tr>
+            <td align="right">
+				<b>Domicilio:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$my_qh;?>" name="my_qh" >
+			</td> 
+			 <td align="right">
+				<b>Localidad:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$my_qm;?>" name="my_qm" >
+			</td>
+		</tr>
+		</tr>
+            <td align="right">
+				<b>Departamento:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$cant_perros;?>" name="cant_perros" >
+			</td> 
+			 <td align="right">
+				<b>Telefono:</b>
+				</td>  
+				<td align="left">
+				<input type="text" size="40" value="<?=$p_comen;?>" name="p_comen" >
+			</td>
+		</tr>
 		
-	<tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>DATOS DE LA ENFERMEDAD</b>
-	           </td>
-	         </tr>
-     </table></td></tr>
-
-	
-	<tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>Fecha de primeros sintomas o Diagnostico:</b>
-				<input type="text" size="10" value="<?=$f_sintoma;?>" name="f_sintoma" >
-            </td>
-			<td align="left">
-				<b>Breve Descripción clínica:</b>
-				<input type="text" size="100" value="<?=$descrip;?>" name="descrip" >
-            </td>
 		</tr>
-		<tr>
-			<td align="left">
-				<b>Terapeutica Medica:</b>
-				<input type="text" size="40" value="<?=$tmedico;?>" name="tmedico" >
-            </td>
-			<td align="left">
-				<b>Terapeutica Quirurgica:</b>
-				<input type="text" size="100" value="<?=$tquirurgico;?>" name="tquirurgico" >
-            </td>
+            <td align="right">
+				<b>Sintomas:</b>
+				</td>  
+				<td align="left">
+				<textarea cols='50' rows='5' name='ovino'><?=$ovino;?></textarea>
+			</td> 
+			 <td align="right">
+				<b>Tratamiento:</b>
+				</td>  
+				<td align="left">
+				<textarea cols='50' rows='5' name='bovino'><?=$bovino;?></textarea>
+			</td>
+		</tr>	
+		
 		</tr>
-	</table></div></td></tr>
-	
-	<tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>DIAGNOSTICO</b>
-	           </td>
-	         </tr>
-     </table></td></tr>
-	 
-	 <tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>DD5:</b>
-				<input type="text" size="25" value="<?=$dd5;?>" name="dd5" >
-            </td>
-			<td align="left">
-				<b>Contrainmunoelectroforesis:</b>
-				<input type="text" size="25" value="<?=$contraief;?>" name="contraief" >
-            </td>
-            <td align="left">
-				<b>Inmunoectroforesis:</b>
-				<input type="text" size="25" value="<?=$inmunoef;?>" name="inmunoef" >
-            </td>
-		</tr>
-		<tr>
-			<td align="left">
-				<b>Imagenes ECO:</b>
-				<input type="text" size="40" value="<?=$ecografia;?>" name="ecografia" >
-            </td>
-			<td align="left">
-				<b>Imagenes TAC:</b>
-				<input type="text" size="40" value="<?=$tac;?>" name="tac" >
-            </td>
-		</tr>
-	</table></div></td></tr>
-	
-	<tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>NOTIFICACION</b>
-	           </td>
-	         </tr>
-     </table></td></tr>
-	
-	<tr><td colspan=9><div><table width=100% align="center" >  
-       	<tr>
-		 	<td align="left">
-				<b>Fecha Notificacion:</b>
-				<input type="text" size="15" value="<?=$f_notificacion;?>" name="f_notificacion" >
-            </td>
-			<td align="left">
-				<b>Medidas Adoptadas:</b>
-				<input type="text" size="80" value="<?=$medidas;?>" name="medidas" >
-            </td>
-		</tr>
-		<tr>
-            <td align="left" colspan=4>
+            <td align="right">
+				<b>Acciones de Control:</b>
+				</td>  
+				<td align="left">
+				<textarea cols='50' rows='5' name='pocino'><?=$pocino;?></textarea>
+			</td> 
+			 <td align="right">
 				<b>Observaciones:</b>
-				<input type="text" size="140" value="<?=$obs;?>" name="obs" >
-            </td>
+				</td>  
+				<td align="left">
+				<textarea cols='50' rows='5' name='equino'><?=$equino;?></textarea>
+			</td>
 		</tr>
 	</table></div></td></tr>
        
-<?if ($id_hidat){?>
+<?if ($id_psita){?>
 		 <table border="1" align="center" width="100%">   
 		 <tr>
 		    <td align="center">
