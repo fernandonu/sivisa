@@ -34,7 +34,7 @@ if ($_POST['borrar']=='Borrar'){
 	$accion="Los datos se han borrado";
 }
 
-$sql_den="select id_hidat from epi.hidatidosis where id_denuncia=$id_denuncia";
+$sql_den="select id_psita from epi.psitacosis where id_denuncia=$id_denuncia";
 $res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
 if ($res_den->recordcount()>0) $id_hidat=$res_den->fields['id_hidat'];
 
