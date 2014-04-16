@@ -26,11 +26,6 @@
 <userdata name='name'>brus_can</userdata>
 <userdata name='dir'>denuncia</userdata>
 </item>
-<item id='3084' text='hidatidosis' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
-<userdata name='nodeType'>3</userdata>
-<userdata name='name'>hidatidosis</userdata>
-<userdata name='dir'>denuncia</userdata>
-</item>
 <item id='3082' text='leish canina' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
 <userdata name='nodeType'>3</userdata>
 <userdata name='name'>leish_can</userdata>
@@ -39,6 +34,11 @@
 <item id='3083' text='leptos' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
 <userdata name='nodeType'>3</userdata>
 <userdata name='name'>leptos</userdata>
+<userdata name='dir'>denuncia</userdata>
+</item>
+<item id='3084' text='psitacosis' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>psita</userdata>
 <userdata name='dir'>denuncia</userdata>
 </item>
 </item>
