@@ -1650,15 +1650,17 @@ function generar_barra_nav($campos_barra) {
 		}
 		if ($cmd == $valor["cmd"]) {
 			$menuid="ma background='$html_root/imagenes/btn_verde.gif'";
-            $barra .= "<a href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
-			$barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >".$valor["descripcion"]."</td>";
-                        $barra.="</a>";
+            $barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >";
+			$barra .= "<a href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
+			$barra .= $valor["descripcion"];
+            $barra.="</a></td>";
 		}
 		else {
 			$menuid="ma"." background='$html_root/imagenes/btn_azul.gif'";
+			$barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >";
 			$barra .= "<a href='".encode_link($_SERVER["PHP_SELF"],is_array($valor["extra"])?array_merge($valor["extra"],array("cmd" => $valor["cmd"])):array("cmd" => $valor["cmd"]))."'>";
-			$barra .= "<td id=$menuid class='bordesderinferior' width='$width%' style='cursor:hand' onmouseover=\"this.style.color='#F7BE81'\" onmouseout=\"this.style.color='#2D3053'\" >".$valor["descripcion"]."</td>";
-			$barra.="</a>";
+			$barra .= $valor["descripcion"];
+			$barra.="</a></td>";
 		}
 	}
 	echo "<table width=95% border=0 cellspacing=3 cellpadding=5 bgcolor='#FFFFFF' align=center>\n";    //bgcolor=$bgcolor3

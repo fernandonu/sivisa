@@ -137,21 +137,6 @@
 <userdata name='dir'>mensajes</userdata>
 </item>
 </item>
-<item id='3021' text='Puco' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
-<userdata name='nodeType'>1</userdata>
-<userdata name='name'>Puco</userdata>
-<userdata name='dir'></userdata>
-<item id='3026' text='Consulta DNI' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>puco_listado_express</userdata>
-<userdata name='dir'>puco</userdata>
-</item>
-<item id='3022' text='Listado PUCO' child='0' im0='iexplore.jpg' im1='iexplore.jpg' im2='iexplore.jpg' >
-<userdata name='nodeType'>2</userdata>
-<userdata name='name'>listado_puco</userdata>
-<userdata name='dir'>puco</userdata>
-</item>
-</item>
 <item id='239' text='Sistema' child='1' im0='folderClosed.gif' im1='folderOpen.gif' im2='folderClosed.gif' >
 <userdata name='nodeType'>1</userdata>
 <userdata name='name'>sistema</userdata>
