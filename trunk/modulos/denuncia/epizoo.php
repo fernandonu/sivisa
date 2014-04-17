@@ -137,122 +137,95 @@ function control_nuevos(){
     </table></td></tr>  
    
 	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >		
-		<tr>
+		<tr >
             <td align="left">
-         	  <b>Perro:</b>
+         	  <b>Cambio de comportamiento animal:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="raza" value="S" <?=($raza=='S')?'checked':'';?> >Si
 							<input type="radio" name="raza" value="N" <?=($raza=='N')?'checked':'';?> >No
 	         </td>
 			 <td align="left">
-         	  <b>Gato:</b>
+         	  <b>Cambio de comportamiento poblacional:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="sexo" value="S" <?=($sexo=='S')?'checked':'';?> >Si
 							<input type="radio" name="sexo" value="N" <?=($sexo=='N')?'checked':'';?> >No
 	         </td>
 			 <td align="left">
-         	  <b>Vaca:</b>
+         	  <b>Cambio en la ecologia de la especie:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="color_m" value="S" <?=($color_m=='S')?'checked':'';?> >Si
 							<input type="radio" name="color_m" value="N" <?=($color_m=='N')?'checked':'';?> >No
-	         </td>
-		</tr>
-		<tr>
+	         </td>		
 			 <td align="left">
-         	  <b>Caballo:</b>
+         	  <b>Sospecha de enfermedad zoonótica:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="edad" value="S" <?=($edad=='S')?'checked':'';?> >Si
 							<input type="radio" name="edad" value="N" <?=($edad=='N')?'checked':'';?> >No
 	         </td>
+		</tr>
+		<tr>
 			 <td align="left">
-         	  <b>Murcielago:</b>
+         	  <b>Animales enfermos:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="nombre" value="S" <?=($nombre=='S')?'checked':'';?> >Si
 							<input type="radio" name="nombre" value="N" <?=($nombre=='N')?'checked':'';?> >No
 	         </td>
-			 
-             <td align="left">
-         	  <b>Otros:</b>
-			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$procedencia;?>" name="procedencia" >
-			</td>            
-		 </tr>
-	</table></div></td></tr> 
-	
-	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
-		<tr>
+         	  <b>Rumor de mortandad:</b>
+         	</td>         	
             <td align="left">
-         	  <b>Propietario:</b>
+							<input type="radio" name="procedencia" value="S" <?=($procedencia=='S')?'checked':'';?> >Si
+							<input type="radio" name="procedencia" value="N" <?=($procedencia=='N')?'checked':'';?> >No
+	         </td>
+			 <td align="left">
+         	  <b>Rumor de mortandad:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="prov_nac" value="S" <?=($prov_nac=='S')?'checked':'';?> >Si
 							<input type="radio" name="prov_nac" value="N" <?=($prov_nac=='N')?'checked':'';?> >No
 	         </td>
-			 
-			<td align="left">
-         	  <b>Domicilio:</b>
-			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$callejero;?>" name="callejero" >
-			</td>  
-			
-			<td align="left">
-         	  <b>Localidad:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$int_casa;?>" name="int_casa" >
-			</td>  
-			
-			<td align="left">
-         	  <b>Provincia:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$gallinero;?>" name="gallinero" >
-			</td>  
-			 
-		</tr>
-		<tr>
-            <td align="left">
-         	  <b>Establecimiento Ganadero:</b>
+         	  <b>Observación de osamentas:</b>
          	</td>         	
             <td align="left">
-							<input type="radio" name="m_perros" value="S" <?=($m_perros=='S')?'checked':'';?> >Si
-							<input type="radio" name="m_perros" value="N" <?=($m_perros=='N')?'checked':'';?> >No
+							<input type="radio" name="callejero" value="S" <?=($callejero=='S')?'checked':'';?> >Si
+							<input type="radio" name="callejero" value="N" <?=($callejero=='N')?'checked':'';?> >No
+	         </td>
+		</tr>
+		<tr>
+			 <td align="left">
+         	  <b>Hallazgo de patógenos con potencial zoonótico en muestrasanimales:</b>
+         	</td>         	
+            <td align="left">
+							<input type="radio" name="int_casa" value="S" <?=($int_casa=='S')?'checked':'';?> >Si
+							<input type="radio" name="int_casa" value="N" <?=($int_casa=='N')?'checked':'';?> >No
+	         </td>
+			 <td align="left">
+         	  <b>Hallazgo de patógenos con potencial zoonótico en muestrasambientales:</b>
+         	</td>         	
+            <td align="left">
+							<input type="radio" name="gallinero" value="S" <?=($gallinero=='S')?'checked':'';?> >Si
+							<input type="radio" name="gallinero" value="N" <?=($gallinero=='N')?'checked':'';?> >No
 	         </td>
 			 
-			<td align="left">
-         	  <b>Total Animales:</b>
+             <td align="left">
+         	  <b>Descripcion del Evento:</b>
 			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$cant;?>" name="cant" >
-			</td>  
-			
-			<td align="left">
-         	  <b>Total Animales Enfermos:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$problema;?>" name="problema" >
-			</td>  
-			
-			<td align="left">
-         	  <b>Total Animales Muertos:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$lab_fecha;?>" name="lab_fecha" >
-			</td> 			 
-		</tr>		
-	</table></div></td></tr>
+			 <td align="left" colspan='4'>
+				<textarea cols='50' rows='3' name='m_perros'><?=$m_perros;?></textarea>
+			</td>            
+		 </tr>
+	</table></div></td></tr> 
 	
 	<tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> DATOS EPIDEMIOLOGICOS</b>
+	            <b> LUGAR DE OCURRENCIA</b>
 	           </td>
 	         </tr>
     </table></td></tr>
@@ -260,192 +233,186 @@ function control_nuevos(){
 	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
 		<tr>
             <td align="left">
-         	  <b>Vacunación antirrábica previa:</b>
+         	  <b>Provincia:</b>
          	</td>         	
-            <td align="left">
-							<input type="radio" name="sangre" value="S" <?=($sangre=='S')?'checked':'';?> >Si
-							<input type="radio" name="sangre" value="N" <?=($sangre=='N')?'checked':'';?> >No
-	         </td>
+           <td align="left">
+      		 <input type="text" size="30" value="<?=$cant;?>" name="cant" >
+			</td>  
 			 
 			<td align="left">
-         	  <b>Vacuna Utilizada:</b>
+         	  <b>Departamento:</b>
 			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$suero;?>" name="suero" >
+      		 <input type="text" size="30" value="<?=$problema;?>" name="problema" >
 			</td>  
 			
 			<td align="left">
-         	  <b>Fecha Ultima Vacunacion:</b>
+         	  <b>Localidad:</b>
 			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$ganglio;?>" name="ganglio" >
+      		 <input type="text" size="30" value="<?=$lab_fecha;?>" name="lab_fecha" >
 			</td>  			 
 		</tr>
 		<tr>
-            <tr><td colspan=9><div ><table width="100%" align="left" >
-			<tr id="ma">         
+			<td align="left">
+         	  <b>Hábitat:</b>
+         	</td>         	
+            <td align="left">
+							<input type="radio" name="sangre" value="u" <?=($sangre=='u')?'checked':'';?> >Urbano
+							<input type="radio" name="sangre" value="r" <?=($sangre=='r')?'checked':'';?> >Rural
+							<input type="radio" name="sangre" value="p" <?=($sangre=='p')?'checked':'';?> >Parque/Reserva
+							<input type="radio" name="sangre" value="o" <?=($sangre=='o')?'checked':'';?> >Otros
+	         </td>
+			 <td align="left">
+         	  <b>Detalle de ubicación (dirección. kilometraje o nombre de la reserva)::</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$suero;?>" name="suero" >
+			</td>
+			<td align="left">
+         	  <b>GPS:</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$ganglio;?>" name="ganglio" >
+			</td>			
+		</tr>
+		
+	</table></div></td></tr>
+	
+	<tr><td colspan=9><div ><table width="100%" align="left" >
+          <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> Exposición al animal 10 dlas antes de morir</b>
+	            <b> MUESTRAS OBTENIDAS</b>
 	           </td>
 	         </tr>
-			</table></td></tr>
+    </table></td></tr>
+	
+	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
+		<tr>
 			<td align="left">
-         	  <b>Mordio:</b>
+         	  <b>Muestra:</b>
          	</td>         	
             <td align="left">
 							<input type="radio" name="piel" value="S" <?=($piel=='S')?'checked':'';?> >Si
 							<input type="radio" name="piel" value="N" <?=($piel=='N')?'checked':'';?> >No
 	         </td>
 			 <td align="left">
-         	  <b>A Quien:</b>
+         	  <b>Tipo:</b>
          	</td>         	
             <td align="left">
-							<input type="radio" name="otro" value="S" <?=($otro=='S')?'checked':'';?> >Humano
-							<input type="radio" name="otro" value="N" <?=($otro=='N')?'checked':'';?> >Animal
-	         </td>
-			 
-			<td align="left">
-         	  <b>Fecha:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$parasitologico;?>" name="parasitologico" >
-			</td>		 
+							<input type="radio" name="otro" value="s" <?=($otro=='s')?'checked':'';?> >Sangre intestinal/Parasito
+							<input type="radio" name="otro" value="o" <?=($otro=='o')?'checked':'';?> >Orina
+							<input type="radio" name="otro" value="m" <?=($otro=='m')?'checked':'';?> >Materia Fecal
+							<input type="radio" name="otro" value="c" <?=($otro=='c')?'checked':'';?> >Contenido
+	         </td>             
 		</tr>
-		<tr>            
+		<tr>
 			<td align="left">
-         	  <b>Otro Contacto:</b>
-         	</td>         	
-            <td align="left">
-							<input type="radio" name="paras_res" value="S" <?=($paras_res=='S')?'checked':'';?> >Si
-							<input type="radio" name="paras_res" value="N" <?=($paras_res=='N')?'checked':'';?> >No
-	         </td>
-			 <td align="left">
-         	  <b>A Quien:</b>
-         	</td>         	
-            <td align="left">
-							<input type="radio" name="serologico" value="S" <?=($serologico=='S')?'checked':'';?> >Humano
-							<input type="radio" name="serologico" value="N" <?=($serologico=='N')?'checked':'';?> >Animal
-	         </td>
-			 
+         	  <b>Muestra:</b>
+         	</td> 
 			<td align="left">
-         	  <b>Fecha:</b>
+							<input type="radio" name="parasitologico" value="s" <?=($parasitologico=='s')?'checked':'';?> >Biopsia
+							<input type="radio" name="parasitologico" value="o" <?=($parasitologico=='o')?'checked':'';?> >Necropsia
+							<input type="radio" name="parasitologico" value="m" <?=($parasitologico=='m')?'checked':'';?> >Tejidos:
+							<input type="radio" name="parasitologico" value="c" <?=($parasitologico=='c')?'checked':'';?> >Contenido
+	         </td>
+			<td align="left">
+         	  <b>Tejidos:</b>
 			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$serol_res;?>" name="serol_res" >
-			</td>		 
+      		 <input type="text" size="30" value="<?=$paras_res;?>" name="paras_res" >		
+		</tr>
+		<tr>
+			<td align="left">
+         	  <b>Preservación:</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$serologico;?>" name="serologico" >	
+			<td align="left">
+         	  <b>Descripcion Otros:</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$serol_res;?>" name="serol_res" >	
 		</tr>		
 	</table></div></td></tr>
 	
 	<tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> EXAMENES DE LABORATORIO</b>
+	            <b> EXÁMENES DE LABORATORIO</b>
 	           </td>
 	         </tr>
     </table></td></tr>
 	
 	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
-		<tr>
-            <td align="left">
-         	  <b>Fecha de Toma de Muestra:</b>
-         	</td>         	
-            <td align="left">
-      		 <input type="text" size="30" value="<?=$molecular;?>" name="molecular" >
-			</td> 
-			
+		<tr>            
 			<td align="left">
-         	  <b>Tipo de Muestra:</b>
+         	  <b>Examen:</b>
          	</td>         	
             <td align="left">
-							<input type="radio" name="mol_res" value="S" <?=($mol_res=='S')?'checked':'';?> >Cerebro
-							<input type="radio" name="mol_res" value="N" <?=($mol_res=='N')?'checked':'';?> >Cabeza
-							<input type="radio" name="mol_res" value="X" <?=($mol_res=='X')?'checked':'';?> >Animal Entero
-	        </td>			 
+							<input type="radio" name="molecular" value="S" <?=($molecular=='S')?'checked':'';?> >Si
+							<input type="radio" name="molecular" value="N" <?=($molecular=='N')?'checked':'';?> >No
+	         </td>
+			 <td align="left">
+         	  <b>Fecha toma de muestra:</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$mol_res;?>" name="mol_res" >
+			</td>		 
 		</tr>
-		<tr>
-            			 
-			<td align="left">
-         	  <b>I.F.D:</b>
+		<tr>            
+			 <td align="left">
+         	  <b>Prueba realizada:</b>
 			 </td> 
 			 <td align="left">
       		 <input type="text" size="30" value="<?=$nom_prop;?>" name="nom_prop" >
-			</td>
+			</td>	
 			<td align="left">
-         	  <b>EB:</b>
+         	  <b>Resultado:</b>
 			 </td> 
 			 <td align="left">
       		 <input type="text" size="30" value="<?=$ape_prop;?>" name="ape_prop" >
-			</td>
-			<td align="left">
-         	  <b>PCR:</b>
+			</td>				
+		</tr>	
+		<tr>
+			 <td align="left">
+         	  <b>Responsable:</b>
 			 </td> 
 			 <td align="left">
       		 <input type="text" size="30" value="<?=$dni_prop;?>" name="dni_prop" >
+			</td>
+			<td align="left">
+         	  <b>Institución:</b>
+			 </td> 
+			 <td align="left">
+      		 <input type="text" size="30" value="<?=$dom_prop;?>" name="dom_prop" >
 			</td>			
-		</tr>		
+		</tr>			
 	</table></div></td></tr>
 	
 	<tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> ACCIONES DE CONTROL Y PREVENCION</b>
+	            <b> OBSERVACIONES O COMENTARIO</b>
 	           </td>
 	         </tr>
     </table></td></tr>
 	
 	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
-		<tr>
-            <tr><td colspan=9><div ><table width="100%" align="left" >
-			<tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b> Comunitaria</b>
-	           </td>
-	         </tr>
-			</table></td></tr>
-			<td align="left">
-         	  <b>Búsqueda de personas expuestas al animal:</b>
-         	</td>         	
-            <td align="left">
-							<input type="radio" name="dom_prop" value="S" <?=($dom_prop=='S')?'checked':'';?> >Si
-							<input type="radio" name="dom_prop" value="N" <?=($dom_prop=='N')?'checked':'';?> >No
-	         </td>
-			 <td align="left">
-         	  <b>Numero de Personas:</b>
-			 </td> 
-			 <td align="left">
-      		 <input type="text" size="30" value="<?=$nro_prop;?>" name="nro_prop" >
-			</td>		 
-		</tr>
 		<tr>            
 			<td align="left">
-         	  <b>Búsqueda y eliminación de animales no vacunados mordidos:</b>
-         	</td>         	
-            <td align="left">
-							<input type="radio" name="tel" value="S" <?=($tel=='S')?'checked':'';?> >Si
-							<input type="radio" name="tel" value="N" <?=($tel=='N')?'checked':'';?> >No
-	         </td>
-			 <td align="left">
-         	  <b>Numero de Animales:</b>
+         	  <b>OBSERVACIONES:</b>
 			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$loca_prop;?>" name="loca_prop" >
-			</td>		 
-		</tr>	
-		<tr>            
+				<textarea cols='50' rows='3' name='nro_prop'><?=$nro_prop;?></textarea>
+			</td>
 			<td align="left">
-         	  <b>Vacunación antirrábica de bloqueo en caninos y felinos de esa localidad frente a un brote de rabia urbana:</b>
-         	</td>         	
-            <td align="left">
-							<input type="radio" name="dep_prop" value="S" <?=($dep_prop=='S')?'checked':'';?> >Si
-							<input type="radio" name="dep_prop" value="N" <?=($dep_prop=='N')?'checked':'';?> >No
-	         </td>
-			 <td align="left">
-         	  <b>Numero de Dosis Aplicada:</b>
+         	  <b>Acciones en Terreno:</b>
 			 </td> 
 			 <td align="left">
-      		 <input type="text" size="30" value="<?=$prop_tenedor;?>" name="prop_tenedor" >
-			</td>		 
-		</tr>			
+				<textarea cols='50' rows='3' name='tel'><?=$tel;?></textarea>
+			</td>						
+		</tr>				
 	</table></div></td></tr>
 	
  </table>           
