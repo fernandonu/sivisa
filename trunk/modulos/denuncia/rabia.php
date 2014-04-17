@@ -88,19 +88,7 @@ echo $html_header;
 <script>
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){
-		 if(document.all.nom_prop.value==""){
-		  	alert('Debe ingresar el Nombre');
-		  	document.all.nom_prop.focus();
-		  	return false;
-		 } 
-		 if(document.all.ape_prop.value==""){
-		  	alert('Debe ingresar Apellido');
-		 	document.all.ape_prop.focus();
-			return false;
-		 } 
-		 
-	
- if (confirm('Confirma agregar datos?'))return true;
+	if (confirm('Confirma agregar datos?'))return true;
 	 else return false;	
 }//de function control_nuevos()
 

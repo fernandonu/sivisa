@@ -8,12 +8,12 @@ if ($_POST['guardar']=='Guardar'){
 	$db->StartTrans();
 	$usuario=$_ses_user['name'];
 	
-		$query="insert into epi.rabia
-				(id_rabia,id_denuncia,usuario,raza,sexo,color_m,edad,nombre,procedencia,prov_nac,callejero,int_casa,gallinero,
+		$query="insert into epi.epizoo
+				(id_epizoo,id_denuncia,usuario,raza,sexo,color_m,edad,nombre,procedencia,prov_nac,callejero,int_casa,gallinero,
 				m_perros,cant,problema,lab_fecha,sangre,suero,ganglio,piel,otro,parasitologico,paras_res,serologico,serol_res,molecular,mol_res,
 				nom_prop,ape_prop,dni_prop,dom_prop,nro_prop,tel,loca_prop,dep_prop,prop_tenedor, t_prov, traslado,sig_cli,oligosint,polisint, d_aire)
 				values
-				(nextval('epi.rabia_id_rabia_seq'),'$id_denuncia','$usuario','$raza','$sexo','$color_m','$edad','$nombre','$procedencia','$prov_nac',
+				(nextval('epi.epizoo_id_epizoo_seq'),'$id_denuncia','$usuario','$raza','$sexo','$color_m','$edad','$nombre','$procedencia','$prov_nac',
 				'$callejero','$int_casa','$gallinero',
 				'$m_perros','$cant','$problema','$lab_fecha','$sangre','$suero','$ganglio','$piel','$otro','$parasitologico','$paras_res','$serologico','$serol_res','$molecular','$mol_res',
 				'$nom_prop','$ape_prop','$dni_prop','$dom_prop','$nro_prop','$tel','$loca_prop','$dep_prop','$prop_tenedor', '$t_prov','$traslado','$sig_cli','$oligosint','$polisint','$d_aire' )";
@@ -24,22 +24,22 @@ if ($_POST['guardar']=='Guardar'){
 
 if ($_POST['borrar']=='Borrar'){
 
-	$query="delete from epi.rabia
-			where id_rabia=$id_rabia";
+	$query="delete from epi.epizoo
+			where id_epizoo=$id_epizoo";
 	
 	sql($query, "Error al eliminar el registro") or fin_pagina(); 
 	
 	$accion="Los datos se han borrado";
 }
-$sql_den="select id_rabia from epi.rabia where id_denuncia=$id_denuncia";
+$sql_den="select id_epizoo from epi.epizoo where id_denuncia=$id_denuncia";
 $res_den =sql($sql_den, "Error consulta t5") or fin_pagina();
-if ($res_den->recordcount()>0) $id_rabia=$res_den->fields['id_rabia'];
+if ($res_den->recordcount()>0) $id_epizoo=$res_den->fields['id_epizoo'];
 
-if ($id_rabia) {
-			$q_lvc="select * from epi.rabia where id_denuncia=$id_denuncia";
+if ($id_epizoo) {
+			$q_lvc="select * from epi.epizoo where id_denuncia=$id_denuncia";
 			$res_lvc=sql($q_lvc, "Error consulta t2") or fin_pagina();
 			if($res_lvc->RecordCount()!=0){
-					$id_rabia=$res_lvc->fields['id_rabia'];
+					$id_epizoo=$res_lvc->fields['id_epizoo'];
 					$raza=$res_lvc->fields['raza'];
 					$sexo=$res_lvc->fields['sexo'];
 					$color_m=$res_lvc->fields['color_m'];
@@ -88,34 +88,22 @@ echo $html_header;
 <script>
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){
-		 if(document.all.nom_prop.value==""){
-		  	alert('Debe ingresar el Nombre');
-		  	document.all.nom_prop.focus();
-		  	return false;
-		 } 
-		 if(document.all.ape_prop.value==""){
-		  	alert('Debe ingresar Apellido');
-		 	document.all.ape_prop.focus();
-			return false;
-		 } 
-		 
-	
- if (confirm('Confirma agregar datos?'))return true;
+	if (confirm('Confirma agregar datos?'))return true;
 	 else return false;	
 }//de function control_nuevos()
 
 
 </script>
 
-<form name='form1' action='rabia.php' method='POST'>
-<input type="hidden" value="<?=$id_rabia?>" name="id_rabia">
+<form name='form1' action='epizoo.php' method='POST'>
+<input type="hidden" value="<?=$id_epizoo?>" name="id_epizoo">
 <input type="hidden" value="<?=$id_denuncia?>" name="id_denuncia">
 <?echo "<center><b><font size='+1' color='red'>$accion</font></b></center>";?>
 <table width="95%" cellspacing=0 border=1 bordercolor=#E0E0E0 align="center" bgcolor='<?=$bgcolor_out?>' class="bordes">
  <tr id="mo">
     <td>
     	<?
-    	if (!$id_rabia) {
+    	if (!$id_epizoo) {
     	?>  
     	<font size=+1><b>Nuevo Dato</b></font>   
     	<? }
@@ -129,7 +117,7 @@ function control_nuevos(){
   <tr><td><table width=100% align="center" class="bordes">
      <tr>
       <td id=mo colspan="2">
-       <b> RABIA </b>
+       <b> EPIZOOTIAS </b>
       </td>
      </tr>
      <tr><td><table>
@@ -143,19 +131,12 @@ function control_nuevos(){
 	<tr><td colspan=9><div ><table width="100%" align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
-	            <b> DATOS DEL CASO</b>
+	            <b> TIPO DE NOTIFICACIÓN</b>
 	           </td>
 	         </tr>
     </table></td></tr>  
    
-	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >   
-		<tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b> Especie</b>
-	           </td>
-	         </tr>
-		</table></td></tr>
+	<tr><td colspan=9><div ><table width="100%" align="left" class=bordes >		
 		<tr>
             <td align="left">
          	  <b>Perro:</b>
@@ -469,7 +450,7 @@ function control_nuevos(){
 	
  </table>           
 <br>
-<?if ($id_rabia){?>
+<?if ($id_epizoo){?>
 <table class="bordes" align="center" width="100%">
 		 <tr>
 		    <td align="center">
