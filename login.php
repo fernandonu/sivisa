@@ -9,7 +9,7 @@ if (ereg("/login.php",$_SERVER["SCRIPT_NAME"])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Sistema de Vigilancia Sanitario</title>
+<title>Sistema de Vigilancia Sanidad Animal</title>
 <head>
 <link rel="icon" href="<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico">
 <link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['HTTP_HOST']).$html_root; ?>/favicon.ico'>
