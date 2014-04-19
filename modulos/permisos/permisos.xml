@@ -11,6 +11,11 @@
 <userdata name='nodeType'>2</userdata>
 <userdata name='name'>den_lis</userdata>
 <userdata name='dir'>denuncia</userdata>
+<item id='3086' text='Listado Excel' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
+<userdata name='nodeType'>3</userdata>
+<userdata name='name'>den_lis_excel</userdata>
+<userdata name='dir'>denuncia</userdata>
+</item>
 <item id='3082' text='Rabia' child='0' im0='leaf.gif' im1='leaf.gif' im2='leaf.gif' >
 <userdata name='nodeType'>3</userdata>
 <userdata name='name'>rabia</userdata>
