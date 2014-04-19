@@ -34,6 +34,9 @@ echo $html_header;
 		<?list($sql,$total_vet,$link_pagina,$up) = form_busqueda($sql_tmp,$orden,$filtro,$link_tmp,$where_tmp,"buscar");?>
 	    &nbsp;&nbsp;<input type=submit name="buscar" value='Buscar'>
 	    &nbsp;&nbsp;<input type='button' name="nuevo_vet" value='Nuevo' onclick="document.location='den_ad.php'">
+		&nbsp;&nbsp;
+	    <? $link=encode_link("den_lis_excel.php",array());?>
+        <img src="../../imagenes/excel.gif" style='cursor:hand;'  onclick="window.open('<?=$link?>')">
 	  </td>
      </tr>
 </table>
