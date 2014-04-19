@@ -31,7 +31,7 @@ else {
 ?>
 <html>
 <head>
-<title>Sistema de Vigilancia Sanitario</title>
+<title>Sistema de Vigilancia Sanidad Animal</title>
 
 <link rel='icon' href='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'>
 <link REL='SHORTCUT ICON' HREF='<? echo ((($_SERVER['HTTPS'])?"https":"http")."://".$_SERVER['SERVER_NAME']).$html_root; ?>/favicon.ico'>
@@ -134,7 +134,7 @@ $accesos=$usuario->get_Accesos();
 					<tr>
 						<td align="right">
 						<b><font face="Trebuchet MS" size="<?=$size?>" color="Navy">
-						Sistema de Vigilancia Sanitario
+						Sistema de Vigilancia Sanidad Animal
 						</font></b></td>
 					</tr>
 					

@@ -1691,10 +1691,10 @@ function enviar_mail($para,$paracc,$parabcc,$asunto,$contenido,$adjunto,$path,$h
  $mail->Username = "plannacer"; 
  $mail->Password = "host2010"; 
  $mail->Timeout=50; 
- $mail->From = "plannacer@sanluis.gov.ar";
- $mail->FromName = "Plan Nacer";
+ $mail->From = "horona@yahoo.com.ar";
+ $mail->FromName = "SIVISA";
  $mail->AddAddress($para,$para);
- $mail->Subject = "Sistema Inteligente Plan Nacer - ".$asunto;
+ $mail->Subject = "Sistema Inteligente SIVISA - ".$asunto;
  $mail->Body = encabezado_mail().$contenido.firma_mail();
  if (!$htmlflag)$mail->IsHTML(true);
  if ($paracc!='')$mail->AddCC($paracc);
