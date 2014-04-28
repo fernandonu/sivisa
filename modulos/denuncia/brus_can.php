@@ -95,9 +95,9 @@ echo $html_header;
 <script>
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){
-		 if(document.all.nom_pac.value==""){
+		 if(document.all.a_domestico.value==""){
 		  	alert('Debe ingresar el Nombre');
-		  	document.all.nom_pac.focus();
+		  	document.all.a_domestico.focus();
 		  	return false;
 		 } 
 		 if(document.all.ape_pac.value==""){
@@ -144,53 +144,7 @@ function control_nuevos(){
 	           </td>
 	         </tr>
     </table></td></tr>	     
-      <tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b> DATOS DEL PROFESIONAL ACTUANTE </b>
-	           </td>
-	         </tr>
-    	</table></td></tr> 
-   
-   <tr><td colspan=9><div ><table width=95% align="left" >
-          <tr>
-         	<td align="left">
-         	  <b>Nombre:</b>
-              <input type="text" size="50" value="<?=$nom_pac;?>" name="nom_pac" >
-            </td>
-            <td align="left">
-         	  <b>Apellido:</b>
-              <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
-            </td>
-          </tr>  
-	 </table></div></td></tr>
-
-	<tr><td colspan=9><div ><table width=95% align="left" >
-          <tr>
-         	<td align="left">
-         	  <b>Matricula:</b>
-              <input type="text" size="50" value="<?=$f_nacimiento;?>" name="f_nacimiento" >
-            </td>
-            <td align="left">
-         	  <b>Localidad:</b>
-              <input type="text" size="50" value="<?=$localidad;?>" name="localidad" >
-            </td>
-          </tr>  
-	 </table></div></td></tr>
-	 
-  <tr><td colspan=9><div ><table width=95% align="left" >        
-		 <tr>
-		 	<td align="left">
-			  <b>Departamento:</b>         	
-              <input type="text" size="50" value="<?=$departamento;?>" name="departamento" >
-            </td>
-			<td align="left">
-         	  <b>Provincia:</b>
-              <input type="text" size="50" value="<?=$sexo;?>" name="sexo" >
-            </td>
-		 </tr>
-	</table></div></td></tr>
-	
+      
 	<tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">
