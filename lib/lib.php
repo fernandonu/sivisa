@@ -1672,13 +1672,13 @@ function firma_mail(){
 	$confiden="\n\nNOTA DE CONFIDENCIALIDAD\n";
 	$confiden.="Este mensaje (y sus anexos) es confidencial generado automaticamente, esta dirigido exclusivamente a ";
 	$confiden.="las personas direccionadas en el mail, puede contener información de ";
-	$confiden.="propiedad exclusiva de PLAN NACER y/o amparada por el secreto profesional.\n";
+	$confiden.="propiedad exclusiva de Programa Epidemiologia y/o amparada por el secreto profesional.\n";
 	$confiden.="El acceso no autorizado, uso, reproducción, o divulgación esta prohibido.\n";
 	return $confiden;
 }
 
 function encabezado_mail(){
-	$confiden="SISTEMA INTELIGENTE PLAN NACER 2.0\n\n";	
+	$confiden="SISTEMA INTELIGENTE SIVISA 2.0\n\n";	
 	return $confiden;
 }
 
