@@ -96,9 +96,9 @@ echo $html_header;
 
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){ 
-	 if(document.all.ape_pac.value==""){
-	  	alert('Debe ingresar el Apellido');
-	  	document.all.ape_pac.focus();
+	 if(document.all.domicilio.value==""){
+	  	alert('Debe ingresar el Apellido del Propietario');
+	  	document.all.domicilio.focus();
 	  	return false;
 	 } 
 	
@@ -141,30 +141,7 @@ function control_nuevos(){
 	           </td>
 	         </tr>
     </table></td></tr>	     
-    <tr><td colspan=9><div ><table width="100%" align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b> DATOS PERSONALES </b>
-	           </td>
-	         </tr>
-    	</table></td></tr> 
-   <tr><td colspan=9><div ><table width=95% align="left" >
-          <tr>
-         	<td align="left">
-         	  <b>Nombre:</b>
-              <input type="text" size="50" value="<?=$nom_pac;?>" name="nom_pac" >
-            </td>
-            <td align="left">
-         	  <b>Apellido:</b>
-              <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
-            </td>
-			<td align="right">
-         	  <b> Telefono:</b>
-             <input type="text" size="50" value="<?=$f_nacimiento;?>" name="f_nacimiento" >
-           </td>
-          </tr>  
-	 </table></div></td></tr>
-	 
+    	 
 	 <tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
 	           <td align="center" colspan="2">

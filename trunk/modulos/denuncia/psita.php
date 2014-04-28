@@ -85,9 +85,9 @@ echo $html_header;
 <script>
 //controlan que ingresen todos los datos necesarios par el muleto
 function control_nuevos(){
-		 if(document.all.nom_pac.value==""){
-		  	alert('Debe ingresar el Nombre');
-		  	document.all.nom_pac.focus();
+		 if(document.all.f_nacimiento.value==""){
+		  	alert('Debe ingresar el Nombre del Propietario');
+		  	document.all.f_nacimiento.focus();
 		  	return false;
 		 } 
 		 if(document.all.ape_pac.value==""){
@@ -136,35 +136,7 @@ function control_nuevos(){
 	         </tr>
     	</table></td></tr>
 		
-   <tr><td colspan=9><div ><table width=100% align="left" >
-          <tr id="ma">         
-	           <td align="center" colspan="2">
-	            <b>DATOS DEL PROFESIONAL ACTUANTE </b>
-	           </td>
-	         </tr>
-    </table></td></tr>
-   <tr><td colspan=9><div ><table width=100% align="center" >
-          <tr>
-         	<td align="right">
-         	  <b>Nombre:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="50" value="<?=$nom_pac;?>" name="nom_pac" >
-            </td>
-            <td align="right">
-         	  <b>Apellido:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="50" value="<?=$ape_pac;?>" name="ape_pac" >
-            </td>
-			<td align="right">
-         	  <b>Telefono:</b>
-         	</td>         	
-            <td align='left'>
-              <input type="text" size="20" value="<?=$sexo;?>" name="sexo" >
-            </td>
-          </tr>  
-	</table></div></td></tr> 
+   
     	
 	<tr><td colspan=9><div ><table width=100% align="left" >
           <tr id="ma">         
