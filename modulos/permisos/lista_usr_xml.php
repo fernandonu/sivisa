@@ -1,13 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: jueves 09/02/06
-
-MODIFICADA POR
-$Author: gonzalo $
-$Revision: 1.3 $
-$Date: 2006/03/31 19:43:21 $
-*/
 
 require_once("../../config.php");
 $grp_id=$_GET['grp_id'] or $grp_id=-1;
@@ -51,6 +42,7 @@ while (!$r->EOF)
 	$r->movenext();
 }
 $xmlDocument->appendChild($root);
+
 
 Header("Content-type:text/xml");
 echo $xmlDocument->saveXML();

@@ -1,13 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: Domingo 19/02/06
-
-MODIFICADA POR
-$Author: gonzalo $
-$Revision: 1.1 $
-$Date: 2006/02/20 00:48:35 $
-*/
 
 require_once("../../config.php");
 
