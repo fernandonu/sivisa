@@ -165,6 +165,11 @@ $html_header = "
 		}
 	</script>
   </head>
- <body topmargin=0 background=$html_root/imagenes/$fondo bgcolor=\"$bgcolor3\"  onload='check_fix_size();document.focus();' onresize='check_fix_size();'>";
+ <body topmargin=0 background=$html_root/imagenes/$fondo bgcolor=\"$bgcolor3\"  onload='check_fix_size();' onresize='check_fix_size();'>";
 
+$footer='   
+    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/jquery.js"></script>
+    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/jquery-migrate-1.2.1.js"></script>
+    <script src="'.$html_root.'/lib/bootstrap-3.1.1-dist/js/bootstrap.js"></script>    
+';
 ?>

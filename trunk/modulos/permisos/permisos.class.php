@@ -1,14 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: martes 13/12/05
-
-MODIFICADA POR
-$Author: mari $
-$Revision: 1.6 $
-$Date: 2007/01/04 20:03:36 $
-*/
-
 
 require_once(LIB_DIR."/class.gacz.php");
 /**
@@ -1011,6 +1001,7 @@ else return false;
 	 */
 	function saveXML($level=0)
 	{
+            
 		if ($level==0)
 		{
 			echo "<?xml version='1.0' encoding='iso-8859-1'?>\n";  
@@ -1392,11 +1383,11 @@ class HTMLArbolPermisos extends HtmlBaseClass
 	}
 	function toBrowser()
 	{
-		echo '<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+		echo '<table width="100%" height="100%" style="max-height:400px" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-			<td height="90%" width="50%">
-				<div id="'.$this->id.'" style="'.$this->style.'" ></div>
-				<div style="background-color:#f5f5f5;border :1px solid Silver;overflow:auto;">
+			<td height="90%" style="max-height:400px" width="50%">
+				<div id="'.$this->id.'" style="'.$this->style.';max-height:400px" ></div>
+				<div style="max-height:400px;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;">
 				<table width="100%">
 					<tr>
 						<td align="center">Buscar <input type="text" name="ikeyword" onkeypress="if (window.event.keyCode==13) {document.all.bbuscar.click();return false;} "/> en ';
@@ -1560,7 +1551,8 @@ function fnBuscar(val,searchBy)
 ";
 	echo"	function fnOnClick()
 				{
-					span_id.innerText='(id='+this.id+')';
+                                $(\"span[id='span_id']\").html('(id='+this.id+')');
+					//span_id.innerText='(id='+this.id+')';
 			
 					//si es un permiso que no puede tener hijos
 					switch (parseInt(tree.getUserData(this.id,'nodeType')))
@@ -1572,7 +1564,7 @@ function fnBuscar(val,searchBy)
 							document.getElementById('bagregar').disabled=false;
 					}
 					fnClear();
-					window.event.cancelBubble=true;//para que no tome el onclick del div
+					//window.event.cancelBubble=true;//para que no tome el onclick del div
 				}";
 	echo "</script>\n";
 	}

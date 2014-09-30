@@ -1,13 +1,4 @@
 <?
-/*
-Creado por: MAC
-Fecha: 21/06/06
-
-Modificada por
-$Author: marco_canderle $
-$Revision: 1.2 $
-$Date: 2006/07/24 19:11:02 $
-*/
 
 require_once("../../config.php");
 

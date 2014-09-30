@@ -1,9 +1,5 @@
 <?
-/*
-$Author: mari $
-$Revision: 1.2 $
-$Date: 2007/01/04 20:00:38 $
-*/
+
 require_once("../../config.php");
 require_once("./permisos.class.php");
 

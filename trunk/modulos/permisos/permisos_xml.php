@@ -1,9 +1,5 @@
 <?
-/*
-$Author: gonzalo $
-$Revision: 1.5 $
-$Date: 2006/04/10 21:05:49 $
-*/
+
 require_once "../../config.php";
 require_once("./permisos.class.php");
 
@@ -73,16 +69,19 @@ function xml_vacio() {
 	exit;
 }
 
-Header("Content-type:text/xml");
+//Header("Content-type:text/xml");
 //Header("Content-type:text/plain");
 
 switch ($_GET['get']) {
-	case 'all':
+	case 'all':{
 /*		$arbol=new ArbolOfPermisos("root");		
 		$arbol->createTree();
 		$arbol->saveXML();
 */
+            ob_clean();
+                    Header("Content-type:text/xml");
 				readfile("./permisos.xml");
+        }
 	break;
 	//Para recuperar la primer solicitud de usuario
 	case 'usr1'://recupero el arbol de permisos para el usuario
@@ -99,12 +98,17 @@ switch ($_GET['get']) {
 				}
 				if($str!="")
 					$XMLtree->SeleccionarItems("//item[$str]");
+                                ob_clean();
+                    Header("Content-type:text/xml");
 				echo $XMLtree->saveXML();
 	break;
-	case 'usr'://recupero el arbol de permisos para el usuario
+	case 'usr':{//recupero el arbol de permisos para el usuario
+                
 				$newUser=user::createById($_GET['usr_id']);
 				$i=0;				
 				//JSON format, retorno un arreglo con los ids de permisos
+                                ob_clean();
+                header('Content-Type: application/json');
 				echo "[";
 				$coma="";
 				while ($i < $newUser->permisos->length)
@@ -113,6 +117,7 @@ switch ($_GET['get']) {
 					$coma=",";
 				}
 				echo "];\n";
+        }
 	break;
 	case 'grp1'://recupero el arbol de permisos para el grupo dado
 
@@ -131,6 +136,8 @@ switch ($_GET['get']) {
 				}
 				if($str!="")
 					$XMLtree->SeleccionarItems("//item[$str]");
+                                ob_clean();
+                    Header("Content-type:text/xml");
 				echo $XMLtree->saveXML();
 	break;
 	case 'grp'://recupero el arbol de permisos para el grupo dado
@@ -141,6 +148,9 @@ switch ($_GET['get']) {
 				$q.="order by id_permiso ";
 				$r=sql($q) or fin_pagina();
 				//JSON format, retorno un arreglo con los ids de permisos
+                                ob_clean();
+                                header('Content-Type: application/json');
+                                
 				echo "[";
 				$coma="";
 				while (!$r->EOF)
@@ -173,7 +183,7 @@ switch ($_GET['get']) {
 	 * @param string key es la palabra a buscar
 	 * @return Array un arreglo en notacion JSON (JavaScript Object Notation) con los ids encontrados
 	 */
-	case 'item':
+	case 'item':{
 		$q ="select id_permiso from permisos where ";
 		switch ($_GET['field']) {
 			case '1'://desc
@@ -189,6 +199,10 @@ switch ($_GET['get']) {
 		};
 		$q.="$field ilike '%".$_GET['key']."%' order by id_permiso,\"desc\"";
 		$r=sql($q) or fin_pagina();
+                
+                ob_clean();
+                header('Content-Type: application/json');
+                
 		echo "[";
 		$coma="";
 		while (!$r->EOF) 
@@ -197,7 +211,7 @@ switch ($_GET['get']) {
 			$coma=",";
 			$r->movenext();
 		}
-		echo "];\n";
+		echo "];\n";}
 		break;//del case item
 		
 	//recupera los usuarios q poseen un permiso determinado
@@ -226,7 +240,9 @@ switch ($_GET['get']) {
 			$root->appendChild($usr);
 			$r->movenext();
 		}
-		$xmlDocument->appendChild($root);	
+		$xmlDocument->appendChild($root);
+                ob_clean();
+                    Header("Content-type:text/xml");
 		echo $xmlDocument->saveXML();	
 	break;
 	//recupera los grupos q poseen un permiso determinado
@@ -249,10 +265,11 @@ switch ($_GET['get']) {
 			$root->appendChild($usr);
 			$r->movenext();
 		}
-		$xmlDocument->appendChild($root);	
+		$xmlDocument->appendChild($root);
+                ob_clean();
+                    Header("Content-type:text/xml");
 		echo $xmlDocument->saveXML();	
 	break;
 	default:
 		break;
 }
-?>

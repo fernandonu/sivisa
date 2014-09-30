@@ -1,15 +1,7 @@
 <?
-/*
-Autor: GACZ
-Creado: martes 13/12/05
-
-MODIFICADA POR
-$Author: mari $
-$Revision: 1.3 $
-$Date: 2007/01/04 20:04:32 $
-*/
-
+set_time_limit(0);
 require_once "../../config.php";
+
 echo $html_header;
 $cmd=$parametros['cmd'];
 $ses_cmd=phpss_svars_get("_ses_permisos_cmd");

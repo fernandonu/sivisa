@@ -1,13 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: jueves 09/02/06
-
-MODIFICADA POR
-$Author: gonzalo $
-$Revision: 1.3 $
-$Date: 2006/03/31 19:43:21 $
-*/
 
 require_once("../../config.php");
 $usr_id=$_GET['usr_id'] or $usr_id=-1;
@@ -63,6 +54,7 @@ while (!$r->EOF)
 }
 $xmlDocument->appendChild($root);
 
+      
 Header("Content-type:text/xml");
 echo $xmlDocument->saveXML();
 

@@ -1,13 +1,5 @@
 <?
-/*
-Autor: GACZ
-Creado: martes 13/12/05
 
-MODIFICADA POR
-$Author: gonzalo $
-$Revision: 1.7 $
-$Date: 2006/04/10 19:55:15 $
-*/
 
 require_once "../../config.php";
 require_once(LIB_DIR."/class.gacz.php");
@@ -62,28 +54,30 @@ $usuario = $_GET["usuario"] or $usuario = "";
 ?>
 	<form id="form_guardar" method="post" action="<?=$_SERVER["PHP_SELF"]; ?>">
 	<input type="hidden" name="tree_checked" id="tree_checked" value="">
-	<input type="hidden" name="group_checked" id="tree_checked" value="">
+	<input type="hidden" name="group_checked" id="group_checked" value="">
 	<? if ($msg) echo "<center>$msg<center>"; ?>
 	<table id="tabla_contenido" width="100%" height="94%" align="center" border="0" cellpadding="2" cellspacing="0">
 	<tr>
 			<td align="center" width="40%">			
 				<b>Usuarios (<?=$oSelect->length ?>)</b><br/>
-				<div id="usuarios" style="height:45%;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;">
+				<div id="usuarios" style="height:40%;max-height: 200px;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;">
 				<?	$oSelect->toBrowser();?>
 				</div>
 				<b>Grupos a los que pertenece el usuario </b><br/>
-				<div id="grupos" align="left" style="height:48%;width:100%;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;" />
+				<div id="grupos" align="left" style="height:48%;max-height: 200px;width:100%;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;" />
 			</td>
-			<td align="center" height="100%">
+			<td align="center" height="100%" style="max-height: 250px;">
 				<b>Permisos de Usuario</b><br/>
 <? $arbol->toBrowser();?>
 			</td>
 		</tr>
 	</table>
 	</form>
+        <?php echo $footer;?>
 	<script>
-	var oUser=document.getElementById('select_usuarios');
-	oUser.focus();
+            
+            //var oUser=document.getElementById('select_usuarios');
+	//oUser.focus();
 	function bguardar_click()
 	{
 		document.getElementById('tree_checked').value = tree.getAllChecked();
@@ -93,20 +87,24 @@ $usuario = $_GET["usuario"] or $usuario = "";
 //var first_urequest=<? if ($oSelect->selectedIndex!=-1) echo "false"; else echo "true"; ?>;
 var first_urequest=true;
 function fnChange()
-{
+{    
 	if (!first_urequest)
 	{
-		doRequest('<?=$html_root?>/modulos/permisos/permisos_xml.php?get=usr&usr_id='+oUser.value,processReqChange);
+		doRequest('<?=$html_root?>/modulos/permisos/permisos_xml.php?get=usr&usr_id='+
+                    $("select[name='select_usuarios'] option:selected").val(),processReqChange);
+                //doRequest('<?=$html_root?>/modulos/permisos/permisos_xml.php?get=usr&usr_id='+oUser.value,processReqChange);
 	}
 	else
 	{
 		//hago el primer requerimiento
 		//first_urequest=false;
 		tree.deleteChildItems("0");
-		tree.loadXML('<?=$html_root?>/modulos/permisos/permisos_xml.php?get=usr1&usr_id='+oUser.value);
+		tree.loadXML('<?=$html_root?>/modulos/permisos/permisos_xml.php?get=usr1&usr_id='+
+                    $("select[name='select_usuarios'] option:selected").val());
 	}
 	treeGrupos.deleteChildItems("0");
-	treeGrupos.loadXML('<?=$html_root?>/modulos/permisos/lista_grp_xml.php?usr_id='+oUser.value);
+	treeGrupos.loadXML('<?=$html_root?>/modulos/permisos/lista_grp_xml.php?usr_id='+
+            $("select[name='select_usuarios'] option:selected").val());
 }
 var oSelect=document.forms[0].select_usuarios;
 var oSelectGrupos=document.getElementById("select_grupos");

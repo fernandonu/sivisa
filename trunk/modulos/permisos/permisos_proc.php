@@ -1,13 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: miercoles 28/12/05
-
-MODIFICADA POR
-$Author: mari $
-$Revision: 1.5 $
-$Date: 2007/01/04 20:05:42 $
-*/
 
 require_once("../../config.php");
 /**
@@ -139,14 +130,18 @@ if ($changes!='')
 							  actualizar_permisos_bd($checked_users);
 					unset($nodos[$i]);
 				break;
-				case 'upd':
+				case 'upd':       
+                                    
 				    $checked_users=obtener_id_usuarios($nodos[$i][1]); 
 				    $nodo=new ArbolOfPermisos($nodos[$i][3],$nodos[$i][4],$nodos[$i][2],$nodos[$i][1]);
 					$nodo->dir=$nodos[$i][6];
 					$nodo->saveDB($nodos[$i][5]);
 					//actualizo los permisos en la bd de cada usuario para el menu
-					if ($checked_users[0]!="") 
+                                        
+					if ($checked_users[0]!="") {
+                                        
 							  actualizar_permisos_bd($checked_users);
+                                        }
 					unset($nodos[$i]);
 					
 				break;

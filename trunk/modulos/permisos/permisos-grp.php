@@ -1,13 +1,4 @@
 <?
-/*
-Autor: GACZ
-Creado: martes 13/12/05
-
-MODIFICADA POR
-$Author: gonzalo $
-$Revision: 1.5 $
-$Date: 2006/04/10 19:55:28 $
-*/
 
 require_once "../../config.php";
 require_once(LIB_DIR."/class.gacz.php");
@@ -57,16 +48,16 @@ if ($oSelectGrp->selectedIndex!=-1)
 	<tr>
 			<td align="center" width="40%">			
 				<b>Grupos (<span id="groupCount"><?=$oSelectGrp->length ?></span>)</b><br/>
-				<div id="grupos" style="height:40%;border :1px solid Silver;overflow:auto;">
+				<div id="grupos" style="height:40%;max-height: 200px; border :1px solid Silver;overflow:auto;">
 				<?=$oSelectGrp->toBrowser();?>
 				</div>
 				<input type="button" name="btn_nuevo_grp" value="Nuevo Grupo" onclick="fnAddGroup();"/>
 				<input type="button" name="btn_eliminar_grp" value="Eliminar Grupo" onclick="fnRemoveGroup()"/>
 				
 				<br/><b>Usuarios que pertenecen al Grupo</b><br/>
-				<div id="usuarios" align="left" style="height:48%;width:100%;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;" />
+				<div id="usuarios" align="left" style="height:48%;max-height: 200px;width:100%;background-color:#f5f5f5;border :1px solid Silver;overflow:auto;" />
 			</td>
-			<td align="center" height="90%" width="49%">
+			<td align="center" style="max-height: 90%" height="90%" width="49%">
 				<b>Permisos de Grupo</b><br/>
 				<? $arbol->toBrowser(); ?>
 			</td>
