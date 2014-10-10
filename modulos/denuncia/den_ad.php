@@ -56,7 +56,7 @@ if ($_POST['guardar']=='Guardar'){
 	    
 	     $db->CompleteTrans();
 		
-		$contenido_mail_control="El profesional: $a_prof, $n_prof Matricula $matricula. Cargo la denuncia: $id_denuncia. Con Fecha de Notificacion: $fecha_notif. POR FAVER VERIFICAR DETALLES EN EL SIVISA";
+		$contenido_mail_control="El profesional: $a_prof, $n_prof Matricula $matricula. Cargo la denuncia: $id_denuncia. Con Fecha de Notificacion: $fecha_notif. POR FAVOR VERIFICAR DETALLES EN EL SIVISA";
     	enviar_mail('fernandonu@gmail.com','','','Carga SIVISA',$contenido_mail_control,'','');
     	enviar_mail('horona@yahoo.com.ar','','','Carga SIVISA',$contenido_mail_control,'','');
 		enviar_mail('christiankano@yahoo.com.ar','','','Carga SIVISA',$contenido_mail_control,'','');
