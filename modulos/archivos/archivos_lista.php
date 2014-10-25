@@ -68,7 +68,7 @@ echo $html_header;?>
 <script  src="<?=$html_root?>/lib/dhtmlXCommon.js"></script>
 <script  src="<?=$html_root?>/lib/dhtmlXTree.js"></script>		
 		
-<form name='archivos_lista' action='archivos_lista.php' method='POST'>
+<form name='archivos_lista' id='archivos_lista' action='archivos_lista.php' method='POST'>
 	<input type=hidden name=id_directorios_archivos value='<?=$id_directorios_archivos?>'>
 
 <table width=100% cellspacing=2>

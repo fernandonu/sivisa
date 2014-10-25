@@ -85,8 +85,8 @@ function muestra_tabla(obj_tabla,nro){
 	 			<div id="treeboxbox_tree" style="width:240;height:450"></div> 
 	 			<script> 
 	 				function tonclick(id){	 						
-	 					document.frames['frame_archivos'].archivos_lista.id_directorios_archivos.value=id;
-	 					document.frames['frame_archivos'].archivos_lista.submit();
+	 					frames.frame_archivos.document.getElementById('archivos_lista').id_directorios_archivos.value=id;
+	 					frames.frame_archivos.document.getElementById('archivos_lista').submit();
 	 				}
 					function tondblclick(id){
 						//alert("Item "+tree.getItemText(id)+" was doubleclicked");
