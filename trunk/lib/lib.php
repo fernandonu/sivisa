@@ -2263,9 +2263,9 @@ function elimina_repetidos($entrada,$retorna_en=1)
 function isIPIn($ip,$net,$mask) {
    $lnet=ip2long($net);
    $lip=ip2long($ip);
-   $binnet=str_pad( decbin($lnet),32,"0","STR_PAD_LEFT" );
+   $binnet=str_pad( decbin($lnet),32,"0",STR_PAD_LEFT);
    $firstpart=substr($binnet,0,$mask);
-   $binip=str_pad( decbin($lip),32,"0","STR_PAD_LEFT" );
+   $binip=str_pad( decbin($lip),32,"0",STR_PAD_LEFT);
    $firstip=substr($binip,0,$mask);
    return(strcmp($firstpart,$firstip)==0);
 }
