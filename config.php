@@ -23,7 +23,7 @@ header("Expires: ".gmdate("D, d M Y H:i:s")." GMT");
 
 $bgcolor_frames = "#B7CEEF";  //color de frames del sistema
 
-$bgcolor1 = "#5090C0";		// Primer color de fondo ok
+$bgcolor1 = "#5090C0";		// Primer color de fondo
 $bgcolor2 = "#D5D5D5";		// Segundo color de fondo
 $bgcolor3 = "#B7CEC4";		// Tercer color de fondo
 $bgcolor4 = "#FF0000";		// Color de fondo para tareas vencidas
